@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YPRatingsView.h"
 
 @interface YPBusinessTableViewCell : UITableViewCell
 
@@ -20,7 +21,7 @@
 @property(strong,readwrite,nonatomic) UIImageView *photoImageView;
 
 @property(strong,readwrite,nonatomic) UIView *nameView;
-@property(strong,readwrite,nonatomic) UIView *ratingView;
+@property(strong,readwrite,nonatomic) YPRatingsView *ratingView;
 @property(strong,readwrite,nonatomic) UIView *aboutView;
 
 @property(strong,readwrite,nonatomic) UIView *starsView;

@@ -7,6 +7,7 @@
 //
 
 #import "YPBusinessTableViewCell.h"
+#import "YPRatingsView.h"
 
 
 @implementation YPBusinessTableViewCell
@@ -25,7 +26,7 @@
     self.categoriesLabel = [[UILabel alloc]init];
     
     self.nameView = [[UIView alloc]init];
-    self.ratingView  = [[UIView alloc]init];
+    self.ratingView  = [[YPRatingsView alloc]init];
     self.aboutView = [[UIView alloc]init];
     self.starsView = [[UIView alloc]init];
     

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "YPBusinessesViewController.h"
 #import "Yelp-Swift.h"
 
 @interface AppDelegate ()
@@ -19,18 +20,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-//    Business *yelp = [[Business alloc]init];
-    [Business searchWithTermWithTerm:@"thai" completion:^(NSArray *objects, NSError *error)
-     {
-         NSLog(@"%@", objects);
-         NSLog(@"%@", objects);
-         Business *yelpBiz = objects[0];
-         NSLog(@"%@", yelpBiz.name);
-         NSLog(@"%@", yelpBiz.name);
-
-
-     }];
     
+    YPBusinessesViewController *businessVC =[[YPBusinessesViewController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:businessVC];
+    
+    //set window
+    self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window setRootViewController:nav];
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
