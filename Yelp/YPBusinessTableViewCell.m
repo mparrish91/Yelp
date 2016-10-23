@@ -72,12 +72,12 @@
     [self.nameView.topAnchor constraintEqualToAnchor:self.photoImageView.topAnchor].active = YES;
     [self.nameView.leadingAnchor constraintEqualToAnchor:self.photoImageView.trailingAnchor].active = YES;
     [self.nameView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
-    [self.nameView.bottomAnchor constraintEqualToAnchor:self.ratingView.topAnchor].active = YES;
+    [self.nameView.bottomAnchor constraintEqualToAnchor:self.ratingView.topAnchor constant:10].active = YES;
     
     self.ratingView.translatesAutoresizingMaskIntoConstraints = false;
     [self.ratingView.leadingAnchor constraintEqualToAnchor:self.photoImageView.trailingAnchor].active = YES;
     [self.ratingView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
-    [self.ratingView.bottomAnchor constraintEqualToAnchor:self.aboutView.topAnchor].active = YES;
+    [self.ratingView.bottomAnchor constraintEqualToAnchor:self.aboutView.topAnchor constant:10].active = YES;
     
     self.aboutView.translatesAutoresizingMaskIntoConstraints = false;
     [self.aboutView.leadingAnchor constraintEqualToAnchor:self.photoImageView.trailingAnchor].active = YES;
