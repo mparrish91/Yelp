@@ -1,5 +1,5 @@
 //
-//  YPTableViewCell.h
+//  YPFilterTableViewCell.h
 //  Yelp
 //
 //  Created by parry on 10/23/16.
@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YPTableViewCell : UITableViewCell
+@interface YPFilterTableViewCell : UITableViewCell
 
-@property(strong,readwrite,nonatomic) UILabel *nameLabel;
+@property(strong,readwrite,nonatomic) UILabel *filterLabel;
 @property(strong,readwrite,nonatomic) UISwitch *filterSwitch;
 
 
