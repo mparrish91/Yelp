@@ -9,7 +9,7 @@
 #import "YPBusinessesViewController.h"
 #import "Yelp-Swift.h"
 
-#import "MBProgressHUD.h"
+//#import "MBProgressHUD.h"
 #import "YPBusinessTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "YPInfiniteScrollActivityView.h"
@@ -85,7 +85,7 @@
     self.businessesTableView.estimatedRowHeight = 100;
     self.businessesTableView.rowHeight = UITableViewAutomaticDimension;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings"  style:UIBarButtonItemStylePlain target:self action:@selector(refreshTable)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter"  style:UIBarButtonItemStylePlain target:self action:@selector(refreshTable)];
     
     [self setConstraints];
     [self doSearch];
@@ -94,19 +94,47 @@
 
 
 - (void)doSearch {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     //    Business *yelp = [[Business alloc]init];
     [Business searchWithTermWithTerm:@"thai" completion:^(NSArray *objects, NSError *error)
      {
-         NSLog(@"%@", objects);
-         NSLog(@"%@", objects);
-         Business *yelpBiz = objects[0];
-         NSLog(@"%@", yelpBiz.name);
-         NSLog(@"%@", yelpBiz.name);
          
+         if (error)
+         {
+             [self showErrorView:self.errorView];
+         }
+         else
+         {
+             [self hideErrorView:self.errorView];
+             
+         }
+         [self.businesses  addObjectsFromArray:objects];
+         self.displayedItems = self.businesses;
+         
+         
+         dispatch_async(dispatch_get_main_queue(), ^{
+             self.isMoreDataLoading = false;
+             [self.businessesTableView reloadData];
+             
+             
+             
+             if ([[NSThread currentThread] isMainThread]){
+                 NSLog(@"In main thread--completion handler");
+                 [self.refreshControl endRefreshing];
+                 [self.loadingMoreView stopAnimating];
+//                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 
+                 
+             }
+             else{
+                 NSLog(@"Not in main thread--completion handler");
+             }
+             
+         });
          
      }];
+
     
     
     
@@ -146,18 +174,19 @@
 {
     
     
-//    Business *business = [self.displayedItems objectAtIndex:indexPath.row];
-//    cell.nameLabel.text = [business name];
-//    cell.ownerLabel.text = [business ownerHandle];
-//    cell.starsLabel.text = [NSString stringWithFormat:@"%li", (long)[business stars].integerValue];
-//    cell.forksLabel.text = [NSString stringWithFormat:@"%li", (long)[business forks].integerValue];
-//    cell.descriptionLabel.text = [business businessDescription];
-//    
-//    NSString *photoImageURL = [business ownerAvatarURL];
-//    
-//    
-//    [cell.photoImageView setImageWithURL:[NSURL URLWithString:photoImageURL] placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
-//    
+    Business *business = [self.displayedItems objectAtIndex:indexPath.row];
+    cell.nameLabel.text = [business name];
+    cell.addressLabel.text = [business address];
+    cell.categoriesLabel.text = [business categories];
+    cell.distanceLabel.text = [business distance];;
+    cell.reviewsLabel.text = [NSString stringWithFormat:@"@%@",[business reviewCount]];
+    
+    NSURL *photoImageURL = [business imageURL];
+    NSURL *ratingImageURL = [business ratingImageURL];
+
+    
+    [cell.photoImageView setImageWithURL:photoImageURL placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
+//
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
@@ -184,7 +213,7 @@
     if (!self.isMoreDataLoading)
     {
         CGFloat scrollViewContentHeight = self.businessesTableView.contentSize.height;
-        CGFloat scrollOffsetThreshold = scrollViewContentHeight - self.b\usinessesTableView.bounds.size.height;
+        CGFloat scrollOffsetThreshold = scrollViewContentHeight - self.businessesTableView.bounds.size.height;
         
         // When the user has scrolled past the threshold, start requesting
         if(scrollView.contentOffset.y > scrollOffsetThreshold && self.businessesTableView.dragging) {

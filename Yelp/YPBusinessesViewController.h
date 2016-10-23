@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YPBusinessesViewController : UIViewController
+@interface YPBusinessesViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UISearchResultsUpdating>
 
 @end
