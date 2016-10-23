@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YPFilterViewController : UIViewController
+@interface YPFilterViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
 @end

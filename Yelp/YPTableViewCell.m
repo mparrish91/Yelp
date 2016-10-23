@@ -1,16 +1,14 @@
 //
-//  YPBusinessTableViewCell.m
+//  YPTableViewCell.m
 //  Yelp
 //
 //  Created by parry on 10/23/16.
 //  Copyright © 2016 parry. All rights reserved.
 //
 
-#import "YPBusinessTableViewCell.h"
-#import "YPRatingsView.h"
+#import "YPTableViewCell.h"
 
-
-@implementation YPBusinessTableViewCell
+@implementation YPTableViewCell
 
 #pragma mark - Initialize
 
@@ -19,7 +17,7 @@
     
     self.photoImageView = [[UIImageView alloc]init];
     self.ratingsImageView = [[UIImageView alloc]init];
-
+    
     self.nameLabel = [[UILabel alloc]init];
     self.distanceLabel = [[UILabel alloc]init];
     self.reviewsLabel = [[UILabel alloc]init];
@@ -66,7 +64,7 @@
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.photoImageView.layer.cornerRadius = 7;
     self.photoImageView.layer.masksToBounds = YES;
-
+    
     
     self.nameView.translatesAutoresizingMaskIntoConstraints = false;
     [self.nameView.topAnchor constraintEqualToAnchor:self.photoImageView.topAnchor].active = YES;
@@ -117,7 +115,7 @@
     self.distanceLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
     self.ratingsImageView.translatesAutoresizingMaskIntoConstraints = false;
-//    [self.ratingsImageView.widthAnchor constraintEqualToConstant:80].active = YES;
+    //    [self.ratingsImageView.widthAnchor constraintEqualToConstant:80].active = YES;
     [self.ratingsImageView.leadingAnchor constraintEqualToAnchor:ratingMargins.leadingAnchor].active = YES;
     [self.ratingsImageView.bottomAnchor constraintEqualToAnchor:ratingMargins.bottomAnchor].active = YES;
     [self.ratingsImageView.topAnchor constraintEqualToAnchor:ratingMargins.topAnchor].active = YES;
@@ -140,7 +138,7 @@
     self.addressLabel.translatesAutoresizingMaskIntoConstraints = false;
     [self.addressLabel.leadingAnchor constraintEqualToAnchor:aboutMargins.leadingAnchor].active = YES;
     [self.addressLabel.centerYAnchor constraintEqualToAnchor:aboutMargins.centerYAnchor constant:-5].active = YES;
-
+    
     
     [self.addressLabel sizeToFit];
     self.addressLabel.font = [UIFont fontWithName:@"Avenir-Book" size:8];
@@ -152,8 +150,8 @@
     self.categoriesLabel.translatesAutoresizingMaskIntoConstraints = false;
     [self.categoriesLabel.leadingAnchor constraintEqualToAnchor:aboutMargins.leadingAnchor].active = YES;
     [self.categoriesLabel.centerYAnchor constraintEqualToAnchor:aboutMargins.centerYAnchor constant:3].active = YES;
-
-
+    
+    
     
     [self.categoriesLabel sizeToFit];
     self.categoriesLabel.font = [UIFont fontWithName:@"Avenir-Book" size:7];
@@ -162,9 +160,9 @@
     self.categoriesLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
     
-//    self.nameView.backgroundColor = [UIColor redColor];
-//    self.ratingView.backgroundColor = [UIColor yellowColor];
-//    self.aboutView.backgroundColor = [UIColor greenColor];
+    //    self.nameView.backgroundColor = [UIColor redColor];
+    //    self.ratingView.backgroundColor = [UIColor yellowColor];
+    //    self.aboutView.backgroundColor = [UIColor greenColor];
 }
 
 
