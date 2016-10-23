@@ -131,7 +131,7 @@
     
     
     [self.reviewsLabel sizeToFit];
-    self.reviewsLabel.font = [UIFont fontWithName:@"Avenir-Book" size:9];
+    self.reviewsLabel.font = [UIFont fontWithName:@"Avenir-Book" size:7];
     self.reviewsLabel.textColor = [UIColor grayColor];
     self.reviewsLabel.numberOfLines = 0;
     self.reviewsLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -139,24 +139,32 @@
     
     self.addressLabel.translatesAutoresizingMaskIntoConstraints = false;
     [self.addressLabel.leadingAnchor constraintEqualToAnchor:aboutMargins.leadingAnchor].active = YES;
-    [self.addressLabel.trailingAnchor constraintEqualToAnchor:aboutMargins.trailingAnchor].active = YES;
-    [self.addressLabel.topAnchor constraintEqualToAnchor:aboutMargins.topAnchor].active = YES;
+    [self.addressLabel.centerYAnchor constraintEqualToAnchor:aboutMargins.centerYAnchor constant:-5].active = YES;
+
+//    [self.addressLabel.topAnchor constraintEqualToAnchor:aboutMargins.topAnchor].active = YES;
+//
+//    [self.addressLabel.bottomAnchor constraintEqualToAnchor:aboutMargins.bottomAnchor].active = YES;
+
+//    [self.addressLabel.trailingAnchor constraintEqualToAnchor:aboutMargins.trailingAnchor].active = YES;
+//    [self.addressLabel.topAnchor constraintEqualToAnchor:aboutMargins.topAnchor].active = YES;
     
     [self.addressLabel sizeToFit];
-    self.addressLabel.font = [UIFont fontWithName:@"Avenir-Book" size:11];
+    self.addressLabel.font = [UIFont fontWithName:@"Avenir-Book" size:8];
     self.addressLabel.textColor = [UIColor blackColor];
     self.addressLabel.numberOfLines = 0;
     self.addressLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
     
     self.categoriesLabel.translatesAutoresizingMaskIntoConstraints = false;
-    [self.categoriesLabel.leadingAnchor constraintEqualToAnchor:ratingMargins.leadingAnchor].active = YES;
-    [self.categoriesLabel.trailingAnchor constraintEqualToAnchor:ratingMargins.trailingAnchor].active = YES;
-    [self.categoriesLabel.bottomAnchor constraintEqualToAnchor:ratingMargins.bottomAnchor].active = YES;
-    [self.categoriesLabel.topAnchor constraintEqualToAnchor:self.addressLabel.bottomAnchor].active = YES;
+    [self.categoriesLabel.leadingAnchor constraintEqualToAnchor:aboutMargins.leadingAnchor].active = YES;
+    [self.categoriesLabel.centerYAnchor constraintEqualToAnchor:aboutMargins.centerYAnchor constant:0].active = YES;
+
+//    [self.categoriesLabel.trailingAnchor constraintEqualToAnchor:ratingMargins.trailingAnchor].active = YES;
+//    [self.categoriesLabel.bottomAnchor constraintEqualToAnchor:ratingMargins.bottomAnchor].active = YES;
+//    [self.categoriesLabel.topAnchor constraintEqualToAnchor:self.addressLabel.bottomAnchor].active = YES;
     
     [self.categoriesLabel sizeToFit];
-    self.categoriesLabel.font = [UIFont fontWithName:@"Avenir-Book" size:9];
+    self.categoriesLabel.font = [UIFont fontWithName:@"Avenir-Book" size:7];
     self.categoriesLabel.textColor = [UIColor grayColor];
     self.categoriesLabel.numberOfLines = 0;
     self.categoriesLabel.lineBreakMode = NSLineBreakByTruncatingTail;
