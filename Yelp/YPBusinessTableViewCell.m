@@ -18,7 +18,8 @@
 {
     
     self.photoImageView = [[UIImageView alloc]init];
-    
+    self.ratingsImageView = [[UIImageView alloc]init];
+
     self.nameLabel = [[UILabel alloc]init];
     self.distanceLabel = [[UILabel alloc]init];
     self.reviewsLabel = [[UILabel alloc]init];
@@ -71,12 +72,12 @@
     [self.nameView.bottomAnchor constraintEqualToAnchor:self.ratingView.topAnchor].active = YES;
     
     self.ratingView.translatesAutoresizingMaskIntoConstraints = false;
-    [self.ratingView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
+    [self.ratingView.leadingAnchor constraintEqualToAnchor:self.photoImageView.trailingAnchor].active = YES;
     [self.ratingView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
-    [self.ratingView.bottomAnchor constraintEqualToAnchor:margins.bottomAnchor].active = YES;
+    [self.ratingView.bottomAnchor constraintEqualToAnchor:self.aboutView.topAnchor].active = YES;
     
     self.aboutView.translatesAutoresizingMaskIntoConstraints = false;
-    [self.aboutView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
+    [self.aboutView.leadingAnchor constraintEqualToAnchor:self.photoImageView.trailingAnchor].active = YES;
     [self.aboutView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
     [self.aboutView.bottomAnchor constraintEqualToAnchor:margins.bottomAnchor].active = YES;
     
@@ -101,9 +102,6 @@
     self.nameLabel.numberOfLines = 0;
     self.nameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
-    
-    
-    
     self.distanceLabel.translatesAutoresizingMaskIntoConstraints = false;
     [self.distanceLabel.trailingAnchor constraintEqualToAnchor:nameMargins.trailingAnchor].active = YES;
     [self.distanceLabel.bottomAnchor constraintEqualToAnchor:nameMargins.bottomAnchor].active = YES;
@@ -116,12 +114,12 @@
     self.distanceLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
     self.ratingsImageView.translatesAutoresizingMaskIntoConstraints = false;
-    self.ratingsImageView.translatesAutoresizingMaskIntoConstraints = false;
-    [self.ratingsImageView.widthAnchor constraintEqualToConstant:80].active = YES;
+//    [self.ratingsImageView.widthAnchor constraintEqualToConstant:80].active = YES;
     [self.ratingsImageView.leadingAnchor constraintEqualToAnchor:ratingMargins.leadingAnchor].active = YES;
-    [self.ratingsImageView.trailingAnchor constraintEqualToAnchor:self.reviewsLabel.leadingAnchor].active = YES;
     [self.ratingsImageView.bottomAnchor constraintEqualToAnchor:ratingMargins.bottomAnchor].active = YES;
     [self.ratingsImageView.topAnchor constraintEqualToAnchor:ratingMargins.topAnchor].active = YES;
+    self.ratingsImageView.contentMode = UIViewContentModeScaleAspectFit;
+
     
     
     self.reviewsLabel.translatesAutoresizingMaskIntoConstraints = false;
