@@ -186,7 +186,7 @@
 
     
     [cell.photoImageView setImageWithURL:photoImageURL placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
-    [cell.ra setImageWithURL:photoImageURL placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
+    [cell.ratingsImageView setImageWithURL:ratingImageURL placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
 
 //
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

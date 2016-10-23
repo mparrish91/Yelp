@@ -26,7 +26,7 @@
     self.categoriesLabel = [[UILabel alloc]init];
     
     self.nameView = [[UIView alloc]init];
-    self.ratingsImageView  = [[UIImageView alloc]init];
+    self.ratingView  = [[UIView alloc]init];
     self.aboutView = [[UIView alloc]init];
     self.starsView = [[UIView alloc]init];
     
@@ -59,16 +59,16 @@
     
     self.photoImageView.translatesAutoresizingMaskIntoConstraints = false;
     [self.photoImageView.widthAnchor constraintEqualToAnchor:self.photoImageView.heightAnchor].active = YES;
-    [self.photoImageView.widthAnchor constraintEqualToConstant:80].active = YES;
+    [self.photoImageView.widthAnchor constraintEqualToConstant:60].active = YES;
     [self.photoImageView.centerYAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
-    [self.photoImageView.leadingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
-    [self.photoImageView.trailingAnchor constraintEqualToAnchor:self.nameView.leadingAnchor].active = YES;
+    [self.photoImageView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.nameView.translatesAutoresizingMaskIntoConstraints = false;
-    [self.nameView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
+    [self.nameView.topAnchor constraintEqualToAnchor:self.photoImageView.topAnchor].active = YES;
+    [self.nameView.leadingAnchor constraintEqualToAnchor:self.photoImageView.trailingAnchor].active = YES;
     [self.nameView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
-    [self.nameView.bottomAnchor constraintEqualToAnchor:self.ratingsImageView.topAnchor].active = YES;
+    [self.nameView.bottomAnchor constraintEqualToAnchor:self.ratingView.topAnchor].active = YES;
     
     self.ratingView.translatesAutoresizingMaskIntoConstraints = false;
     [self.ratingView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
@@ -161,6 +161,11 @@
     self.categoriesLabel.textColor = [UIColor grayColor];
     self.categoriesLabel.numberOfLines = 0;
     self.categoriesLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    
+    
+    self.nameView.backgroundColor = [UIColor redColor];
+    self.ratingView.backgroundColor = [UIColor yellowColor];
+    self.aboutView.backgroundColor = [UIColor greenColor];
 }
 
 
