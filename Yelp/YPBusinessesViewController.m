@@ -179,7 +179,7 @@
     cell.addressLabel.text = [business address];
     cell.categoriesLabel.text = [business categories];
     cell.distanceLabel.text = [business distance];;
-    cell.reviewsLabel.text = [NSString stringWithFormat:@"%@",[business reviewCount]];
+    cell.reviewsLabel.text = [NSString stringWithFormat:@"%@ Reviews",[business reviewCount]];
     
     NSURL *photoImageURL = [business imageURL];
     NSURL *ratingImageURL = [business ratingImageURL];

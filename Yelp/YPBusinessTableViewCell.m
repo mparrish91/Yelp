@@ -64,6 +64,9 @@
     [self.photoImageView.centerYAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
     [self.photoImageView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.photoImageView.layer.cornerRadius = 17;
+    self.photoImageView.layer.masksToBounds = YES;
+
     
     self.nameView.translatesAutoresizingMaskIntoConstraints = false;
     [self.nameView.topAnchor constraintEqualToAnchor:self.photoImageView.topAnchor].active = YES;
@@ -119,11 +122,10 @@
     [self.ratingsImageView.bottomAnchor constraintEqualToAnchor:ratingMargins.bottomAnchor].active = YES;
     [self.ratingsImageView.topAnchor constraintEqualToAnchor:ratingMargins.topAnchor].active = YES;
     self.ratingsImageView.contentMode = UIViewContentModeScaleAspectFit;
-
     
     
     self.reviewsLabel.translatesAutoresizingMaskIntoConstraints = false;
-    [self.reviewsLabel.trailingAnchor constraintEqualToAnchor:ratingMargins.trailingAnchor].active = YES;
+    [self.reviewsLabel.leadingAnchor constraintEqualToAnchor:_ratingsImageView.trailingAnchor constant:10].active = YES;
     [self.reviewsLabel.bottomAnchor constraintEqualToAnchor:ratingMargins.bottomAnchor].active = YES;
     [self.reviewsLabel.topAnchor constraintEqualToAnchor:ratingMargins.topAnchor].active = YES;
     
@@ -136,9 +138,8 @@
     
     
     self.addressLabel.translatesAutoresizingMaskIntoConstraints = false;
-    [self.addressLabel.leadingAnchor constraintEqualToAnchor:aboutMargins.trailingAnchor].active = YES;
+    [self.addressLabel.leadingAnchor constraintEqualToAnchor:aboutMargins.leadingAnchor].active = YES;
     [self.addressLabel.trailingAnchor constraintEqualToAnchor:aboutMargins.trailingAnchor].active = YES;
-    [self.addressLabel.bottomAnchor constraintEqualToAnchor:self.categoriesLabel.topAnchor].active = YES;
     [self.addressLabel.topAnchor constraintEqualToAnchor:aboutMargins.topAnchor].active = YES;
     
     [self.addressLabel sizeToFit];
