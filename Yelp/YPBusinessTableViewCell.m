@@ -26,7 +26,7 @@
     self.categoriesLabel = [[UILabel alloc]init];
     
     self.nameView = [[UIView alloc]init];
-    self.ratingView  = [[YPRatingsView alloc]init];
+    self.ratingsImageView  = [[UIImageView alloc]init];
     self.aboutView = [[UIView alloc]init];
     self.starsView = [[UIView alloc]init];
     
@@ -37,7 +37,7 @@
     [self.nameView addSubview:self.distanceLabel];
     [[self contentView]addSubview:self.nameView];
     
-    [self.ratingView addSubview:self.starsView];
+    [self.ratingView addSubview:self.ratingsImageView];
     [self.ratingView addSubview:self.reviewsLabel];
     [[self contentView]addSubview:self.ratingView];
     
@@ -68,12 +68,12 @@
     self.nameView.translatesAutoresizingMaskIntoConstraints = false;
     [self.nameView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
     [self.nameView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
-    [self.nameView.bottomAnchor constraintEqualToAnchor:self.ratingView.topAnchor].active = YES;
+    [self.nameView.bottomAnchor constraintEqualToAnchor:self.ratingsImageView.topAnchor].active = YES;
     
     self.ratingView.translatesAutoresizingMaskIntoConstraints = false;
     [self.ratingView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
     [self.ratingView.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
-    [self.ratingView.bottomAnchor constraintEqualToAnchor:self.aboutView.topAnchor].active = YES;
+    [self.ratingView.bottomAnchor constraintEqualToAnchor:margins.bottomAnchor].active = YES;
     
     self.aboutView.translatesAutoresizingMaskIntoConstraints = false;
     [self.aboutView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
@@ -115,11 +115,13 @@
     self.distanceLabel.numberOfLines = 0;
     self.distanceLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
-    self.ratingView.translatesAutoresizingMaskIntoConstraints = false;
-    [self.ratingView.leadingAnchor constraintEqualToAnchor:ratingMargins.leadingAnchor].active = YES;
-    [self.ratingView.trailingAnchor constraintEqualToAnchor:self.reviewsLabel.leadingAnchor].active = YES;
-    [self.ratingView.bottomAnchor constraintEqualToAnchor:ratingMargins.bottomAnchor].active = YES;
-    [self.ratingView.topAnchor constraintEqualToAnchor:ratingMargins.topAnchor].active = YES;
+    self.ratingsImageView.translatesAutoresizingMaskIntoConstraints = false;
+    self.ratingsImageView.translatesAutoresizingMaskIntoConstraints = false;
+    [self.ratingsImageView.widthAnchor constraintEqualToConstant:80].active = YES;
+    [self.ratingsImageView.leadingAnchor constraintEqualToAnchor:ratingMargins.leadingAnchor].active = YES;
+    [self.ratingsImageView.trailingAnchor constraintEqualToAnchor:self.reviewsLabel.leadingAnchor].active = YES;
+    [self.ratingsImageView.bottomAnchor constraintEqualToAnchor:ratingMargins.bottomAnchor].active = YES;
+    [self.ratingsImageView.topAnchor constraintEqualToAnchor:ratingMargins.topAnchor].active = YES;
     
     
     self.reviewsLabel.translatesAutoresizingMaskIntoConstraints = false;
