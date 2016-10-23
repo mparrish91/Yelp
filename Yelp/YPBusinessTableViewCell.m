@@ -64,7 +64,7 @@
     [self.photoImageView.centerYAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
     [self.photoImageView.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.photoImageView.layer.cornerRadius = 17;
+    self.photoImageView.layer.cornerRadius = 14;
     self.photoImageView.layer.masksToBounds = YES;
 
     
@@ -141,12 +141,6 @@
     [self.addressLabel.leadingAnchor constraintEqualToAnchor:aboutMargins.leadingAnchor].active = YES;
     [self.addressLabel.centerYAnchor constraintEqualToAnchor:aboutMargins.centerYAnchor constant:-5].active = YES;
 
-//    [self.addressLabel.topAnchor constraintEqualToAnchor:aboutMargins.topAnchor].active = YES;
-//
-//    [self.addressLabel.bottomAnchor constraintEqualToAnchor:aboutMargins.bottomAnchor].active = YES;
-
-//    [self.addressLabel.trailingAnchor constraintEqualToAnchor:aboutMargins.trailingAnchor].active = YES;
-//    [self.addressLabel.topAnchor constraintEqualToAnchor:aboutMargins.topAnchor].active = YES;
     
     [self.addressLabel sizeToFit];
     self.addressLabel.font = [UIFont fontWithName:@"Avenir-Book" size:8];
@@ -157,11 +151,9 @@
     
     self.categoriesLabel.translatesAutoresizingMaskIntoConstraints = false;
     [self.categoriesLabel.leadingAnchor constraintEqualToAnchor:aboutMargins.leadingAnchor].active = YES;
-    [self.categoriesLabel.centerYAnchor constraintEqualToAnchor:aboutMargins.centerYAnchor constant:0].active = YES;
+    [self.categoriesLabel.centerYAnchor constraintEqualToAnchor:aboutMargins.centerYAnchor constant:3].active = YES;
 
-//    [self.categoriesLabel.trailingAnchor constraintEqualToAnchor:ratingMargins.trailingAnchor].active = YES;
-//    [self.categoriesLabel.bottomAnchor constraintEqualToAnchor:ratingMargins.bottomAnchor].active = YES;
-//    [self.categoriesLabel.topAnchor constraintEqualToAnchor:self.addressLabel.bottomAnchor].active = YES;
+
     
     [self.categoriesLabel sizeToFit];
     self.categoriesLabel.font = [UIFont fontWithName:@"Avenir-Book" size:7];
