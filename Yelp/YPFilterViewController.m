@@ -272,6 +272,9 @@
 //This function is where all the magic happens
 -(void) tableView:(UITableView *) tableView willDisplayCell:(YPFilterTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary *categoryName = [self.categories objectAtIndex:indexPath.row];
+    cell.filterLabel.text = categoryName[@"name"];
+
     
     }
 
