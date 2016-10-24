@@ -26,6 +26,9 @@
     [[self contentView]addSubview:self.filterLabel];
     [[self contentView]addSubview:self.filterSwitch];
     
+    [self.filterSwitch addTarget: self action: @selector(onSwitchPressed) forControlEvents: UIControlEventValueChanged];
+
+    
     
     return self;
 }
@@ -48,5 +51,8 @@
    
 }
 
+-(void) onSwitchPressed {
+    NSLog(@"switch pressed bro");
+}
 
 @end
