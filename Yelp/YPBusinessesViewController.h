@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YPFilterViewController.h"
+
 @protocol YPFiltersViewControllerDelegate;
 
-@interface YPBusinessesViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, YPFilterTableViewCellDelegate>
+@interface YPBusinessesViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, YPFiltersViewControllerDelegate>
 
 @end
 

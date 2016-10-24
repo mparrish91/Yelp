@@ -356,9 +356,23 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
     NSDictionary *filters = [[NSDictionary alloc]init];
+    
+    NSMutableArray *selectedCategories = [[NSMutableArray alloc]init];
+    
+    for (NSString *row in self.switchStates) {
+        if issele
+            }
+    
+    if (selectedCategories.count > 0)
+    {
+        filters[@"categories"] = selectedCategories;
+    }
+
     if ([self.delegate respondsToSelector:@selector(ypFiltersViewControllerDidUpdateFilters:filters:)]) {
         [self.delegate ypFiltersViewControllerDidUpdateFilters:self filters:filters];
     }
+    
+  
 }
 
 
