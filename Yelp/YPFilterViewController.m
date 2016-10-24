@@ -378,7 +378,6 @@
         [self.delegate ypFiltersViewControllerDidUpdateFilters:self filters:filters];
     }
     
-  
 }
 
 
