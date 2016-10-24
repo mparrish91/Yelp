@@ -19,6 +19,9 @@
 @property (nonatomic, strong) NSMutableArray * filteredBusinesses;
 @property (nonatomic, strong) NSArray * displayedItems;
 @property (nonatomic, strong) NSMutableDictionary * switchStates;
+@property (nonatomic, strong) NSArray * filters;
+@property (nonatomic, strong) NSArray * distance;
+@property (nonatomic, strong) NSArray * sort;
 
 
 
@@ -33,6 +36,9 @@
 {
     self.filtersTableView = [[UITableView alloc]init];
     self.switchStates = [[NSMutableDictionary alloc]init];
+    self.filters = @[ @"Offering a Deal", @"Sort By",@"Distance", @"Category"];
+    self.distance = @[ @"Auto", @"0.3 miles",@"1 mile", @"5 miles", @"20 miles"];
+    self.sort = @[ @"Best Match", @"Highest Rated",@"Distance"];
 
     self.categories = @[@
     {@"name" : @"Afghan", @"code": @"afghani"},
@@ -245,11 +251,57 @@
 
 #pragma mark - TableView
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.filters.count;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.categories.count;
+    if (section == 0)
+    {
+        return 1;
+
+    }
+
+    if (section == 1)
+    {
+        return self.distance.count;
+
+    }
+    if (section == 2)
+    {
+        return self.sort.count;
+    }
+    
+    if (section == 3)
+    {
+        return self.categories.count;
+    }
+    
+    return 1;
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+   
+    headerView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.9];
+    UILabel *categoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 10, 80, 30)];
+    categoryLabel.font = [UIFont fontWithName:@"Avenir-Book" size:9];
+    categoryLabel.textColor = [UIColor blackColor];
+    
+    categoryLabel.text = [self.filters objectAtIndex:section];
+    
+    [headerView addSubview:categoryLabel];
+    
+    
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 20;
+}
+
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
