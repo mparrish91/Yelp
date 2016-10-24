@@ -396,22 +396,36 @@
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar:(UISearchBar *)searchBar
 {
-    
+    [self.searchBar setShowsCancelButton:true animated:true];
+    return true;
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
+    [self.searchBar setShowsCancelButton:false animated:true];
+    return true;
     
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     NSLog(@"Cancel");
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    
+    [self handleSearch:searchBar];
+
 }
 
+- (void)handleSearch:(UISearchBar *)searchBar {
+    
+    //check what was passed as the query String and get rid of the keyboard
+    NSLog(@"User searched for %@", searchBar.text);
+   NSString *queryString = searchBar.text;
+    [searchBar resignFirstResponder];
+
+}
 
 @end
