@@ -41,6 +41,8 @@
     self.filterLabel.translatesAutoresizingMaskIntoConstraints = false;
     [self.filterLabel.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
     [self.filterLabel.centerYAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
+    self.filterLabel.font = [UIFont fontWithName:@"Avenir-Book" size:11];
+
 
     self.filterSwitch.translatesAutoresizingMaskIntoConstraints = false;
     [self.filterSwitch.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;

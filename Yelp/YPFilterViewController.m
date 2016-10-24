@@ -286,8 +286,8 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
    
     headerView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.9];
-    UILabel *categoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 10, 80, 30)];
-    categoryLabel.font = [UIFont fontWithName:@"Avenir-Book" size:9];
+    UILabel *categoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 120, 30)];
+    categoryLabel.font = [UIFont fontWithName:@"Avenir-Book-Bold" size:15];
     categoryLabel.textColor = [UIColor blackColor];
     
     categoryLabel.text = [self.filters objectAtIndex:section];
@@ -299,13 +299,13 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20;
+    return 40;
 }
 
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    return 100;
+    return 60;
 }
 
 
@@ -326,11 +326,29 @@
 //This function is where all the magic happens
 -(void) tableView:(UITableView *) tableView willDisplayCell:(YPFilterTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *categoryName = [self.categories objectAtIndex:indexPath.row];
-    cell.filterLabel.text = categoryName[@"name"];
+    if (indexPath.section == 0)
+    {
+        cell.filterLabel.text = self.filters[0];
+        
+    }
+    
+    if (indexPath.section == 1)
+    {
+        cell.filterLabel.text = self.distance[indexPath.row];
+    }
+    if (indexPath.section == 2)
+    {
+        cell.filterLabel.text = self.sort[indexPath.row];
+    }
+    
+    if (indexPath.section == 3)
+    {
+        NSDictionary *categoryName = [self.categories objectAtIndex:indexPath.row];
+        cell.filterLabel.text = categoryName[@"name"];
+    }
+    
+    
     cell.delegate = self;
-    
-    
     NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     if (self.switchStates[convertedIndexPath] != nil)
     {
