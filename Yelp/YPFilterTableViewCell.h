@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-//@protocol YPFilterTableViewCellDelegate <PVQViewDelegate>
+@protocol YPFilterTableViewCellDelegate;
 
 
 @interface YPFilterTableViewCell : UITableViewCell
@@ -26,6 +25,9 @@
 
 @protocol YPFilterTableViewCellDelegate <NSObject>
 @optional
-- (void)ypFilterCellSwitchDidChange:(YPFilterTableViewCell *)cell value: BOOL;
+- (void)ypFilterCellSwitchDidChange:(YPFilterTableViewCell *)cell value: (BOOL)value;
 
 @end
+
+
+
