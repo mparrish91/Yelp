@@ -17,8 +17,8 @@
 @property(nonatomic,strong) UITableView *filtersTableView;
 
 @property (nonatomic, strong) NSMutableArray * filteredBusinesses;
-@property (nonatomic, weak) NSArray * displayedItems;
-@property (nonatomic, weak) NSMutableDictionary * switchStates;
+@property (nonatomic, strong) NSArray * displayedItems;
+@property (nonatomic, strong) NSMutableDictionary * switchStates;
 
 
 
@@ -32,7 +32,8 @@
 - (instancetype)init
 {
     self.filtersTableView = [[UITableView alloc]init];
-    
+    self.switchStates = [[NSMutableDictionary alloc]init];
+
     self.categories = @[@
     {@"name" : @"Afghan", @"code": @"afghani"},
         @{@"name" : @"African", @"code": @"african"},
@@ -276,7 +277,21 @@
     NSDictionary *categoryName = [self.categories objectAtIndex:indexPath.row];
     cell.filterLabel.text = categoryName[@"name"];
     cell.delegate = self;
+    
+    
+    NSString *convertedIndexPath = [NSString stringWithFormat:@"%@",indexPath.row];
+    if (self.switchStates[convertedIndexPath] != nil)
+    {
+        cell.filterSwitch.on = self.switchStates[convertedIndexPath];
+
     }
+    else{
+        cell.filterSwitch.on = false;
+
+    }
+    
+
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -296,7 +311,6 @@
     NSIndexPath *indexPath = [self.filtersTableView indexPathForCell:cell];
     
     NSLog(@"filters got the switch event");
-    self.switchStates = [[NSMutableDictionary alloc]init];
     NSString *convertedIndexPath = [NSString stringWithFormat:@"%@",indexPath.row];
     self.switchStates[convertedIndexPath] = [NSNumber numberWithBool:value];
     
@@ -341,6 +355,10 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     
+    NSDictionary *filters = [[NSDictionary alloc]init];
+    if ([self.delegate respondsToSelector:@selector(ypFiltersViewControllerDidUpdateFilters:filters:)]) {
+        [self.delegate ypFiltersViewControllerDidUpdateFilters:self filters:filters];
+    }
 }
 
 

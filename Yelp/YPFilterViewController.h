@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YPFilterTableViewCell.h"
+@protocol YPFiltersViewControllerDelegate;
 
-@interface YPFilterViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+
+@interface YPFilterViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, YPFilterTableViewCellDelegate>
+
+@property(weak,nonatomic) id <YPFiltersViewControllerDelegate> delegate;
 
 @end
+
+
+
+@protocol YPFiltersViewControllerDelegate <NSObject>
+@optional
+- (void)ypFiltersViewControllerDidUpdateFilters:(YPFilterViewController *)filtersViewController filters:(NSDictionary *)filters;
+
+@end
+
