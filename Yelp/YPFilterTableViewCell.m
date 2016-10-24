@@ -48,7 +48,9 @@
     [self.filterSwitch.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
     [self.filterSwitch.centerYAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
 
-
+    [self.filterSwitch setImage:[UIImage imageNamed:@"yelp_icon"] forState:UIControlStateSelected];
+    [self.filterSwitch setImage:[UIImage imageNamed:@"yelp_icon"] forState:UIControlStateNormal];
+    
     
    
 }
