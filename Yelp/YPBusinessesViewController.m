@@ -209,7 +209,10 @@
 
 - (void)presentFilterView {
         YPFilterViewController *filterVC = [[YPFilterViewController alloc]init];
-        [self.navigationController pushViewController:filterVC animated:true];
+//        [self.navigationController pushViewController:filterVC animated:true];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:filterVC];
+    [self presentViewController:nav animated:true completion:nil];
+
 }
 
 

@@ -223,9 +223,9 @@
     self.title = @"Filter";
     
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"  style:UIBarButtonItemStylePlain target:self action:@selector(refreshTable)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"  style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButtonTapped)];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search"  style:UIBarButtonItemStylePlain target:self action:@selector(refreshTable)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search"  style:UIBarButtonItemStylePlain target:self action:@selector(onSearchButtonTapped)];
     
     self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.7];
     
@@ -318,6 +318,18 @@
     
 }
 
+
+-(void)onCancelButtonTapped
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+-(void)onSearchButtonTapped
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
 
 
 
