@@ -367,8 +367,7 @@
             NSString *code = category[@"code"];
             [selectedCategories addObject:code];
         }
-        else
-        {
+    }
     
     if (selectedCategories.count > 0)
     {
