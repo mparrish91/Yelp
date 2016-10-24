@@ -14,6 +14,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "YPInfiniteScrollActivityView.h"
 #import "YPErrorView.h"
+#import "YPFilterViewController.h"
+
 
 @interface YPBusinessesViewController ()
 
@@ -85,7 +87,7 @@
     self.businessesTableView.estimatedRowHeight = 100;
     self.businessesTableView.rowHeight = UITableViewAutomaticDimension;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter"  style:UIBarButtonItemStylePlain target:self action:@selector(refreshTable)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter"  style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterView)];
     
     [self setConstraints];
     [self doSearch];
@@ -202,6 +204,14 @@
     //    //    FLMovieDetailViewController *detailVC = [[FLMovieDetailViewController alloc]initWithURL:[movie posterPath]];
     //    [self.navigationController pushViewController:detailVC animated:true];
 }
+
+
+
+- (void)presentFilterView {
+        YPFilterViewController *filterVC = [[YPFilterViewController alloc]init];
+        [self.navigationController pushViewController:filterVC animated:true];
+}
+
 
 - (void)refreshTable {
     [self doSearch];

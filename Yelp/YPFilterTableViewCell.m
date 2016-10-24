@@ -40,7 +40,7 @@
     [self.filterLabel.centerYAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
 
     self.filterSwitch.translatesAutoresizingMaskIntoConstraints = false;
-    [self.filterSwitch.leadingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
+    [self.filterSwitch.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
     [self.filterSwitch.centerYAnchor constraintEqualToAnchor:margins.centerYAnchor].active = YES;
 
 
