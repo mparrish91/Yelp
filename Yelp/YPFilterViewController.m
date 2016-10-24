@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) NSMutableArray * filteredBusinesses;
 @property (nonatomic, weak) NSArray * displayedItems;
+@property (nonatomic, weak) NSMutableDictionary * switchStates;
 
 
 
@@ -274,8 +275,7 @@
 {
     NSDictionary *categoryName = [self.categories objectAtIndex:indexPath.row];
     cell.filterLabel.text = categoryName[@"name"];
-
-    
+    cell.delegate = self;
     }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -289,6 +289,18 @@
     //    [self.navigationController pushViewController:detailVC animated:true];
 }
 
+
+
+- (void)ypFilterCellSwitchDidChange:(YPFilterTableViewCell *)cell value: (BOOL)value;
+{
+    NSIndexPath *indexPath = [self.filtersTableView indexPathForCell:cell];
+    
+    NSLog(@"filters got the switch event");
+    self.switchStates = [[NSMutableDictionary alloc]init];
+    NSString *convertedIndexPath = [NSString stringWithFormat:@"%@",indexPath.row];
+    self.switchStates[convertedIndexPath] = [NSNumber numberWithBool:value];
+    
+}
 
 
 - (void)loadView

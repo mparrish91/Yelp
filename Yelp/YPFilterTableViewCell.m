@@ -53,7 +53,7 @@
 
 -(void) onSwitchPressed {
     NSLog(@"switch pressed bro");
-    if ([self.delegate respondsToSelector:@selector(ypFilterCellSwitchDidChange:)]) {
+    if ([self.delegate respondsToSelector:@selector(ypFilterCellSwitchDidChange:value:)]) {
         [self.delegate ypFilterCellSwitchDidChange:self value:self.filterSwitch.on];
     }
 
