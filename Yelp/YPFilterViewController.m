@@ -357,14 +357,15 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
     NSMutableDictionary *filters = [[NSMutableDictionary alloc]init];
-    
     NSMutableArray *selectedCategories = [[NSMutableArray alloc]init];
     
     for (NSString *row in self.switchStates) {
-        id object = [self.switchStates objectForKey: row];
-        if (object == @"1")
+        NSNumber *state = [self.switchStates objectForKey: row];
+        if ([state  isEqualToNumber: [NSNumber numberWithInt:1]])
         {
-            
+            NSDictionary *category = self.categories[[row integerValue]];
+            NSString *code = category[@"code"];
+            [selectedCategories addObject:code];
         }
         else
         {
