@@ -311,9 +311,10 @@
     NSIndexPath *indexPath = [self.filtersTableView indexPathForCell:cell];
     
     NSLog(@"filters got the switch event");
-    NSString *convertedIndexPath = [NSString stringWithFormat:@"%@",indexPath.row];
+    NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     self.switchStates[convertedIndexPath] = [NSNumber numberWithBool:value];
-    
+    NSLog(@"filters got the switch event");
+
 }
 
 
@@ -355,13 +356,13 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    NSDictionary *filters = [[NSDictionary alloc]init];
+    NSMutableDictionary *filters = [[NSMutableDictionary alloc]init];
     
     NSMutableArray *selectedCategories = [[NSMutableArray alloc]init];
     
-    for (NSString *row in self.switchStates) {
-        if issele
-            }
+//    for (NSString *row in self.switchStates) {
+//        if issele
+//            }
     
     if (selectedCategories.count > 0)
     {

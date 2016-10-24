@@ -218,42 +218,43 @@
 - (void)ypFiltersViewControllerDidUpdateFilters:(YPFilterViewController *)filtersViewController filters:(NSDictionary *)filters
 {
     NSArray *categories = filters[@"categories"];
-    [Business searchWithTermWithTerm:@"Restaurants" sort: nil categories: deals:nil completion:^(NSArray *objects, NSError *error)
-     {
-         
-         if (error)
-         {
-             [self showErrorView:self.errorView];
-         }
-         else
-         {
-             [self hideErrorView:self.errorView];
-             
-         }
-         [self.businesses addObjectsFromArray:objects];
-         self.displayedItems = self.businesses;
-         
-         
-         dispatch_async(dispatch_get_main_queue(), ^{
-             self.isMoreDataLoading = false;
-             [self.businessesTableView reloadData];
-             
-             
-             
-             if ([[NSThread currentThread] isMainThread]){
-                 NSLog(@"In main thread--completion handler");
-                 [self.refreshControl endRefreshing];
-                 [self.loadingMoreView stopAnimating];
-                 
-                 
-             }
-             else{
-                 NSLog(@"Not in main thread--completion handler");
-             }
-             
-         });
-         
-     }];
+////    [Business searchWithTermWithTerm:@"Restaurants" sort: nil categories:categories deals:nil completion:^(NSArray *objects, NSError *error)
+////      [Business searchw]
+//     {
+//         
+//         if (error)
+//         {
+//             [self showErrorView:self.errorView];
+//         }
+//         else
+//         {
+//             [self hideErrorView:self.errorView];
+//             
+//         }
+//         [self.businesses addObjectsFromArray:objects];
+//         self.displayedItems = self.businesses;
+//         
+//         
+//         dispatch_async(dispatch_get_main_queue(), ^{
+//             self.isMoreDataLoading = false;
+//             [self.businessesTableView reloadData];
+//             
+//             
+//             
+//             if ([[NSThread currentThread] isMainThread]){
+//                 NSLog(@"In main thread--completion handler");
+//                 [self.refreshControl endRefreshing];
+//                 [self.loadingMoreView stopAnimating];
+//                 
+//                 
+//             }
+//             else{
+//                 NSLog(@"Not in main thread--completion handler");
+//             }
+//             
+//         });
+//         
+//     }];
 
 }
 
