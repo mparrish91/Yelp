@@ -19,7 +19,7 @@
 
 @interface YPBusinessesViewController ()
 
-@property(strong,readwrite,nonatomic) NSMutableArray *businesses;
+@property(strong,readwrite,nonatomic) NSArray *businesses;
 @property (nonatomic,assign) BOOL isMoreDataLoading;
 
 
@@ -111,7 +111,7 @@
              [self hideErrorView:self.errorView];
              
          }
-         [self.businesses  addObjectsFromArray:objects];
+         self.businesses = objects;
          self.displayedItems = self.businesses;
          
          
@@ -230,9 +230,9 @@
              [self hideErrorView:self.errorView];
              
          }
-         [self.businesses addObjectsFromArray:objects];
+         self.businesses = objects;
          self.displayedItems = self.businesses;
-         
+
          
          dispatch_async(dispatch_get_main_queue(), ^{
              self.isMoreDataLoading = false;
