@@ -392,18 +392,26 @@
     
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+// MARK: SearchBar methods
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar:(UISearchBar *)searchBar
 {
-    [self.businessesTableView setContentOffset:CGPointMake(0, 0)];
     
 }
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
-    [self.businessesTableView setContentOffset:CGPointMake(0, 0)];
     
 }
 
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    NSLog(@"Cancel");
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    
+}
 
 
 @end
