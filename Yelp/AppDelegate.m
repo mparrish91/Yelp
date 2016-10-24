@@ -23,7 +23,11 @@
     
     YPBusinessesViewController *businessVC =[[YPBusinessesViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:businessVC];
-    
+    [UINavigationBar appearance].barTintColor = [UIColor redColor];
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+
+    nav.navigationBar.translucent = false;
+
     //set window
     self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window setRootViewController:nav];

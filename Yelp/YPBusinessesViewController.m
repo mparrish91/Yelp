@@ -87,7 +87,17 @@
     self.businessesTableView.estimatedRowHeight = 100;
     self.businessesTableView.rowHeight = UITableViewAutomaticDimension;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter"  style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterView)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter"  style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterView)];
+    
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    
+    UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterView)];
+
+    
+    negativeSpacer.width = -14;
+    
+    [self.navigationItem setLeftBarButtonItems:@[negativeSpacer, filter /* this will be the button which you actually need */] animated:NO];
+
     
     [self setConstraints];
     [self doSearch];
@@ -210,6 +220,9 @@
 - (void)presentFilterView {
         YPFilterViewController *filterVC = [[YPFilterViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:filterVC];
+    nav.navigationBar.titleTextAttributes
+    = @{UITextAttributeTextColor : [UIColor whiteColor]};
+    
     [self presentViewController:nav animated:true completion:nil];
     filterVC.delegate = self;
 
