@@ -279,7 +279,7 @@
     cell.delegate = self;
     
     
-    NSString *convertedIndexPath = [NSString stringWithFormat:@"%@",indexPath.row];
+    NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     if (self.switchStates[convertedIndexPath] != nil)
     {
         cell.filterSwitch.on = self.switchStates[convertedIndexPath];
@@ -360,9 +360,14 @@
     
     NSMutableArray *selectedCategories = [[NSMutableArray alloc]init];
     
-//    for (NSString *row in self.switchStates) {
-//        if issele
-//            }
+    for (NSString *row in self.switchStates) {
+        id object = [self.switchStates objectForKey: row];
+        if (object == @"1")
+        {
+            
+        }
+        else
+        {
     
     if (selectedCategories.count > 0)
     {
