@@ -1,6 +1,6 @@
 # Project 2 - *Yelp*
 
-**Flicks** is a movies app using the [The Yelp API](https://www.yelp.com/developer…).
+**Flicks** is a movies app using the [The Yelp API](https://www.yelp.com/developer…).  Built in Objective C.  No Storyboards using NSLayoutAnchor.
 
 Time spent: **18** hours spent in total
 
@@ -45,6 +45,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+Understanding delegation.  Adding the polish(long way to go there)
+
 
 ## License
 
