@@ -1,6 +1,6 @@
 # Project 2 - *Yelp*
 
-**Flicks** is a movies app using the [The Yelp API](https://www.yelp.com/developer…).  Built in Objective C.  No Storyboards using NSLayoutAnchor.
+**Flicks** is a movies app using the [The Yelp API](https://www.yelp.com/developer…).  Built in Objective C.  No Storyboards. Using NSLayoutAnchor.
 
 Time spent: **18** hours spent in total
 
