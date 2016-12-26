@@ -183,6 +183,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:true];
 }
 
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+//    return 100;
+//}
 
 
 - (void)presentFilterView {
@@ -195,6 +198,8 @@
     filterVC.delegate = self;
 
 }
+
+#pragma mark - delegate methods
 
 - (void)ypFiltersViewControllerDidUpdateFilters:(YPFilterViewController *)filtersViewController filters:(NSDictionary *)filters
 {
