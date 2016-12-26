@@ -8,8 +8,7 @@
 
 #import "YPBusinessesViewController.h"
 #import "Yelp-Swift.h"
-
-//#import "MBProgressHUD.h"
+#import "MBProgressHUD.h"
 #import "YPBusinessTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "YPInfiniteScrollActivityView.h"
@@ -46,15 +45,12 @@
 {
     self.businessesTableView = [[UITableView alloc]init];
     self.searchBar = [[UISearchBar alloc] init];
-    
     self.errorView = [[YPErrorView alloc]init];
     self.businesses = [[NSMutableArray alloc] init];
     self.filteredBusinesses = [[NSMutableArray alloc] init];
     
-    
     if (!(self = [super init]))
         return nil;
-    
     
     return self;
 }
@@ -80,64 +76,55 @@
     [self.businessesTableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     
-    //    UIEdgeInsets insets = self.businessesTableView.contentInset;
-    //    insets.bottom += FLInfiniteScrollActivityView.defaultHeight
-    //    self.moviesTableView.contentInset = insets;
+    UIEdgeInsets insets = self.businessesTableView.contentInset;
+    insets.bottom += YPInfiniteScrollActivityView.defaultHeight;
+    self.businessesTableView.contentInset = insets;
     
     self.businessesTableView.estimatedRowHeight = 100;
     self.businessesTableView.rowHeight = UITableViewAutomaticDimension;
     
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter"  style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterView)];
-    
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     
     UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterView)];
-
-    
     negativeSpacer.width = -14;
     
-    [self.navigationItem setLeftBarButtonItems:@[negativeSpacer, filter /* this will be the button which you actually need */] animated:NO];
+    [self.navigationItem setLeftBarButtonItems:@[negativeSpacer, filter] animated:NO];
 
     
     [self setConstraints];
-    [self doSearch];
+    [self doSearch:@"test"];
+    
+    [self setupInfiniteScrollView];
+    [self addSearchBar];
     
 }
 
 
-- (void)doSearch {
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    //    Business *yelp = [[Business alloc]init];
-    [Business searchWithTermWithTerm:@"thai" completion:^(NSArray *objects, NSError *error)
+- (void)doSearch: (NSString *) term {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    term = @"thai";
+    [Business searchWithTermWithTerm:term completion:^(NSArray *objects, NSError *error)
      {
          
          if (error)
          {
              [self showErrorView:self.errorView];
          }
-         else
-         {
-             [self hideErrorView:self.errorView];
-             
-         }
+
          self.businesses = objects;
          self.displayedItems = self.businesses;
          
          
          dispatch_async(dispatch_get_main_queue(), ^{
              self.isMoreDataLoading = false;
-             [self.businessesTableView reloadData];
-             
-             
              
              if ([[NSThread currentThread] isMainThread]){
-                 NSLog(@"In main thread--completion handler");
                  [self.refreshControl endRefreshing];
                  [self.loadingMoreView stopAnimating];
-//                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                 
-                 
+                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 [self.businessesTableView reloadData];
+
              }
              else{
                  NSLog(@"Not in main thread--completion handler");
@@ -146,9 +133,6 @@
          });
          
      }];
-
-    
-    
     
 }
 
@@ -159,11 +143,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return self.displayedItems.count;
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    return 100;
 }
 
 
@@ -200,19 +179,12 @@
     [cell.photoImageView setImageWithURL:photoImageURL placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
     [cell.ratingsImageView setImageWithURL:ratingImageURL placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
 
-//
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-    
-//    Business *business = [self.displayedItems objectAtIndex:indexPath.row];
-    
-    //    FLMovieDetailViewController *detailVC = [[FLMovieDetailViewController alloc]initWithMovie:movie];
-    //    //    FLMovieDetailViewController *detailVC = [[FLMovieDetailViewController alloc]initWithURL:[movie posterPath]];
-    //    [self.navigationController pushViewController:detailVC animated:true];
 }
 
 
@@ -252,7 +224,6 @@
              [self.businessesTableView reloadData];
              
              
-             
              if ([[NSThread currentThread] isMainThread]){
                  NSLog(@"In main thread--completion handler");
                  [self.refreshControl endRefreshing];
@@ -276,7 +247,7 @@
 
 
 - (void)refreshTable {
-    [self doSearch];
+    [self doSearch:@"test"];
 }
 
 
@@ -297,7 +268,7 @@
             self.loadingMoreView.frame = frame;
             [self.loadingMoreView startAnimating];
             
-            [self doSearch];
+            [self doSearch:@"test"];
             
         }
     }
@@ -382,15 +353,6 @@
     
 }
 
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    
-    [self setupInfiniteScrollView];
-    [self addSearchBar];
-    
-}
 
 // MARK: SearchBar methods
 
