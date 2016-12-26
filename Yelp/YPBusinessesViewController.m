@@ -96,6 +96,8 @@
     
     [self setupInfiniteScrollView];
     [self addSearchBar];
+    [self hideErrorView:self.errorView];
+
     
 }
 
@@ -114,7 +116,6 @@
 
          self.businesses = objects;
          self.displayedItems = self.businesses;
-         
          
          dispatch_async(dispatch_get_main_queue(), ^{
              self.isMoreDataLoading = false;
@@ -156,15 +157,6 @@
         cell = [[YPBusinessTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    
-    return cell;
-}
-
-//This function is where all the magic happens
--(void) tableView:(UITableView *) tableView willDisplayCell:(YPBusinessTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
     Business *business = [self.displayedItems objectAtIndex:indexPath.row];
     cell.nameLabel.text = [business name];
     cell.addressLabel.text = [business address];
@@ -174,13 +166,17 @@
     
     NSURL *photoImageURL = [business imageURL];
     NSURL *ratingImageURL = [business ratingImageURL];
-
+    
     
     [cell.photoImageView setImageWithURL:photoImageURL placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
     [cell.ratingsImageView setImageWithURL:ratingImageURL placeholderImage:[UIImage imageNamed:@"placeholder-background"]];
-
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    
+    return cell;
 }
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -210,11 +206,7 @@
          {
              [self showErrorView:self.errorView];
          }
-         else
-         {
-             [self hideErrorView:self.errorView];
-             
-         }
+
          self.businesses = objects;
          self.displayedItems = self.businesses;
 
@@ -395,11 +387,7 @@
          {
              [self showErrorView:self.errorView];
          }
-         else
-         {
-             [self hideErrorView:self.errorView];
-             
-         }
+
          self.businesses = objects;
          self.displayedItems = self.businesses;
          
