@@ -18,7 +18,7 @@
 
 @interface YPBusinessesViewController ()
 
-@property(strong,readwrite,nonatomic) NSArray *businesses;
+@property(strong,readwrite,nonatomic) NSMutableArray *businesses;
 @property (nonatomic,assign) BOOL isMoreDataLoading;
 
 @property(nonatomic,strong) UITableView *businessesTableView;
@@ -113,7 +113,7 @@
              [self showErrorView:self.errorView];
          }
          
-         self.businesses = objects;
+         [self.businesses addObjectsFromArray:objects];
          self.displayedItems = self.businesses;
          
          dispatch_async(dispatch_get_main_queue(), ^{
@@ -141,8 +141,10 @@
 - (void)doSearch: (NSString *) term atPath: (NSNumber *) offset {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
+    int count = [offset intValue];
+
     term = @"thai";
-    [Business searchWithTermWithTerm:term offset: offset completion:^(NSArray *objects, NSError *error)
+    [Business searchWithTermWithTerm:term offset: count completion:^(NSArray *objects, NSError *error)
      {
          
          if (error)
@@ -150,7 +152,7 @@
              [self showErrorView:self.errorView];
          }
 
-         self.businesses = objects;
+         [self.businesses addObjectsFromArray:objects];
          self.displayedItems = self.businesses;
          
          dispatch_async(dispatch_get_main_queue(), ^{
