@@ -102,6 +102,10 @@
     self.ratingsImageView.translatesAutoresizingMaskIntoConstraints = false;
     [self.ratingsImageView.leadingAnchor constraintEqualToAnchor:self.nameLabel.leadingAnchor constant:0].active = YES;
     [self.ratingsImageView.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor].active = YES;
+    
+    [self.ratingsImageView.heightAnchor constraintEqualToConstant:20].active = YES;
+    [self.ratingsImageView.widthAnchor constraintEqualToConstant:55].active = YES;
+
     self.ratingsImageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.reviewsLabel.translatesAutoresizingMaskIntoConstraints = false;
