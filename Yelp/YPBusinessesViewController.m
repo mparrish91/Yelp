@@ -94,19 +94,55 @@
     [self setConstraints];
     [self doSearch:@"test"];
     
-//    [self setupInfiniteScrollView];
-//    [self addSearchBar];
+    [self setupInfiniteScrollView];
+    [self addSearchBar];
     [self hideErrorView:self.errorView];
 
     
 }
 
-
 - (void)doSearch: (NSString *) term {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    term = @"thai";
+    [Business searchWithTermWithTerm:term completion:^(NSArray *objects, NSError *error)
+     {
+         
+         if (error)
+         {
+             [self showErrorView:self.errorView];
+         }
+         
+         self.businesses = objects;
+         self.displayedItems = self.businesses;
+         
+         dispatch_async(dispatch_get_main_queue(), ^{
+             self.isMoreDataLoading = false;
+             
+             if ([[NSThread currentThread] isMainThread]){
+                 [self.refreshControl endRefreshing];
+                 [self.loadingMoreView stopAnimating];
+                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 [self.businessesTableView reloadData];
+                 
+             }
+             else{
+                 NSLog(@"Not in main thread--completion handler");
+             }
+             
+         });
+         
+     }];
+    
+}
+
+
+
+- (void)doSearch: (NSString *) term atPath: (NSNumber *) offset {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
     term = @"thai";
-    [Business searchWithTermWithTerm:term completion:^(NSArray *objects, NSError *error)
+    [Business searchWithTermWithTerm:term offset: offset completion:^(NSArray *objects, NSError *error)
      {
          
          if (error)
@@ -200,7 +236,10 @@
 {
     NSArray *categories = filters[@"categories"];
     
-    [Business searchWithCategoriesWithTerm:@"Restaurants" categories:categories completion:^(NSArray *objects, NSError *error)
+    int count = self.businesses.count;
+    
+    [Business searchWithCategoriesWithTerm:@"Restaurants" offset:count categories:categories completion:^(NSArray *objects, NSError *error)
+
      {
          if (error)
          {
@@ -259,8 +298,9 @@
             CGRect frame = CGRectMake(0, self.businessesTableView.contentSize.height - self.tabBarController.tabBar.frame.size.height, self.businessesTableView.bounds.size.width, YPInfiniteScrollActivityView.defaultHeight);
             self.loadingMoreView.frame = frame;
             [self.loadingMoreView startAnimating];
+            NSNumber *count = [NSNumber numberWithInteger:self.businesses.count];
             
-            [self doSearch:@"test"];
+            [self doSearch:@"test" atPath:count];
             
         }
     }
@@ -331,7 +371,6 @@
     self.loadingMoreView = [[YPInfiniteScrollActivityView alloc]initWithFrame:frame];
     self.loadingMoreView.hidden = true;
     [self.businessesTableView addSubview:self.loadingMoreView];
-    self.loadingMoreView.backgroundColor = [UIColor yellowColor];
     
     
 }
