@@ -101,14 +101,14 @@
     
     
     self.ratingsImageView.translatesAutoresizingMaskIntoConstraints = false;
-    [self.ratingsImageView.leadingAnchor constraintEqualToAnchor:self.photoImageView.trailingAnchor constant:8].active = YES;
+    [self.ratingsImageView.leadingAnchor constraintEqualToAnchor:self.nameLabel.leadingAnchor constant:-10].active = YES;
     [self.addressLabel.bottomAnchor constraintEqualToAnchor:self.ratingsImageView.bottomAnchor constant:8].active = YES;
-    [self.ratingsImageView.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:1].active = YES;
+    [self.ratingsImageView.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor].active = YES;
     self.ratingsImageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.reviewsLabel.translatesAutoresizingMaskIntoConstraints = false;
-    [self.reviewsLabel.leadingAnchor constraintEqualToAnchor:self.ratingsImageView.trailingAnchor constant:10].active = YES;
-    [self.reviewsLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:1].active = YES;
+    [self.reviewsLabel.leadingAnchor constraintEqualToAnchor:self.ratingsImageView.trailingAnchor constant:5].active = YES;
+    [self.reviewsLabel.centerYAnchor constraintEqualToAnchor:self.ratingsImageView.centerYAnchor].active = YES;
     
     [self.reviewsLabel sizeToFit];
     self.reviewsLabel.font = [UIFont fontWithName:@"Avenir-Book" size:7];
@@ -118,8 +118,9 @@
     
     
     self.addressLabel.translatesAutoresizingMaskIntoConstraints = false;
-    [self.addressLabel.leadingAnchor constraintEqualToAnchor:self.ratingsImageView.trailingAnchor constant:10].active = YES;
-    [self.addressLabel.topAnchor constraintEqualToAnchor:self.reviewsLabel.bottomAnchor constant:8].active = YES;
+    [self.addressLabel.leadingAnchor constraintEqualToAnchor:self.photoImageView.trailingAnchor constant:8].active = YES;
+    [self.addressLabel.topAnchor constraintEqualToAnchor:self.ratingsImageView.bottomAnchor constant:4].active = YES;
+    [self.addressLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor].active = YES;
 
     [self.addressLabel sizeToFit];
     self.addressLabel.font = [UIFont fontWithName:@"Avenir-Book" size:8];
@@ -127,10 +128,18 @@
     self.addressLabel.numberOfLines = 0;
     self.addressLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
+    NSLayoutConstraint *verticalCompressionResistance = [self.addressLabel.heightAnchor constraintGreaterThanOrEqualToConstant:self.addressLabel.intrinsicContentSize.width];
+    verticalCompressionResistance.priority = [self.addressLabel contentCompressionResistancePriorityForAxis:UILayoutConstraintAxisVertical] + 1;
     
     self.categoriesLabel.translatesAutoresizingMaskIntoConstraints = false;
-    [self.categoriesLabel.leadingAnchor constraintEqualToAnchor:self.ratingsImageView.trailingAnchor constant:10].active = YES;
-    [self.categoriesLabel.topAnchor constraintEqualToAnchor:self.addressLabel.bottomAnchor constant:8].active = YES;
+    [self.categoriesLabel.leadingAnchor constraintEqualToAnchor:self.photoImageView.trailingAnchor constant:8].active = YES;
+    [self.categoriesLabel.topAnchor constraintEqualToAnchor:self.addressLabel.bottomAnchor constant:1].active = YES;
+    
+    [self.contentView.bottomAnchor  constraintGreaterThanOrEqualToAnchor:self.categoriesLabel.bottomAnchor constant:10].active = YES;
+    
+    NSLayoutConstraint *cont2 = [self.contentView.bottomAnchor  constraintEqualToAnchor:self.categoriesLabel.bottomAnchor constant:10];
+    cont2.priority = 250;
+    cont2.active = YES;
     
     [self.categoriesLabel sizeToFit];
     self.categoriesLabel.font = [UIFont fontWithName:@"Avenir-Book" size:7];
