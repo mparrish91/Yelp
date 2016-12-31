@@ -21,11 +21,9 @@
 @property(strong,readwrite,nonatomic) UIImageView *photoImageView;
 @property(strong,readwrite,nonatomic) UIImageView *ratingsImageView;
 
-@property(strong,readwrite,nonatomic) UIView *nameView;
-@property(strong,readwrite,nonatomic) UIView *ratingView;
-@property(strong,readwrite,nonatomic) UIView *aboutView;
-
 @property(strong,readwrite,nonatomic) UIView *starsView;
+
+- (void)adjustSizeToMatchWidth:(CGFloat)width;
 
 
 @end

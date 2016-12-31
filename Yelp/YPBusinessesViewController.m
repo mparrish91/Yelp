@@ -21,7 +21,6 @@
 @property(strong,readwrite,nonatomic) NSArray *businesses;
 @property (nonatomic,assign) BOOL isMoreDataLoading;
 
-
 @property(nonatomic,strong) UITableView *businessesTableView;
 @property(nonatomic,strong) UIRefreshControl *refreshControl;
 @property(nonatomic,strong) UISearchBar *searchBar;
@@ -80,8 +79,9 @@
     insets.bottom += YPInfiniteScrollActivityView.defaultHeight;
     self.businessesTableView.contentInset = insets;
     
-    self.businessesTableView.estimatedRowHeight = 100;
     self.businessesTableView.rowHeight = UITableViewAutomaticDimension;
+    self.businessesTableView.estimatedRowHeight = 120;
+
     
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     
@@ -94,8 +94,8 @@
     [self setConstraints];
     [self doSearch:@"test"];
     
-    [self setupInfiniteScrollView];
-    [self addSearchBar];
+//    [self setupInfiniteScrollView];
+//    [self addSearchBar];
     [self hideErrorView:self.errorView];
 
     
@@ -173,7 +173,6 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    
     return cell;
 }
 
@@ -182,10 +181,6 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-//    return 100;
-//}
 
 
 - (void)presentFilterView {
