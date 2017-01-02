@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSArray * filters;
 @property (nonatomic, strong) NSArray * distance;
 @property (nonatomic, strong) NSArray * sort;
+@property (nonatomic, strong) NSIndexPath * selectedRowIndex;
 
 
 
@@ -305,7 +306,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    return 60;
+        return 60;
 }
 
 
@@ -363,16 +364,13 @@
 
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:true];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedRowIndex = indexPath;
     
-    //    Business *business = [self.displayedItems objectAtIndex:indexPath.row];
-    
-    //    FLMovieDetailViewController *detailVC = [[FLMovieDetailViewController alloc]initWithMovie:movie];
-    //    //    FLMovieDetailViewController *detailVC = [[FLMovieDetailViewController alloc]initWithURL:[movie posterPath]];
-    //    [self.navigationController pushViewController:detailVC animated:true];
+    [tableView beginUpdates];
+    [tableView endUpdates];
 }
+
 
 
 

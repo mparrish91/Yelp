@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import MapKit
 
 @objc class Business: NSObject {
     let name: String?
     let address: String?
+    var location2D: CLLocationCoordinate2D = CLLocationCoordinate2D()
     let imageURL: URL?
     let categories: String?
     let distance: String?
@@ -45,6 +47,21 @@ import UIKit
         }
         self.address = address
         
+        // Added coordinates for map
+        if location != nil {
+            let coordinates = location!["coordinate"] as? NSDictionary
+            if coordinates != nil {
+                let latitude = coordinates!["latitude"] as? Double
+                let longitude = coordinates!["longitude"] as? Double
+                self.location2D = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
+            } else {
+                //self.location2D = nil
+            }
+        }
+        else {
+            //self.location2D = nil
+        }
+
         let categoriesArray = dictionary["categories"] as? [[String]]
         if categoriesArray != nil {
             var categoryNames = [String]()

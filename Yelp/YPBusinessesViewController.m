@@ -14,6 +14,7 @@
 #import "YPInfiniteScrollActivityView.h"
 #import "YPErrorView.h"
 #import "YPFilterViewController.h"
+#import "YPMapViewController.h"
 
 
 @interface YPBusinessesViewController ()
@@ -85,10 +86,30 @@
     
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     
-    UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterView)];
+    UIBarButtonItem *map = [[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStylePlain target:self action:@selector(presentMap)];
     negativeSpacer.width = -14;
     
-    [self.navigationItem setLeftBarButtonItems:@[negativeSpacer, filter] animated:NO];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(presentFilterView) forControlEvents:UIControlEventTouchUpInside];
+
+    [button setFrame:CGRectMake(0, 0, 50, 30)];
+    [button setImage:[UIImage imageNamed:@"filter.png"] forState:UIControlStateNormal];
+  
+    
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    
+//    self.navigationItem.leftBarButtonItem = leftItem;
+    
+    [self.navigationItem setLeftBarButtonItems:@[negativeSpacer, leftItem] animated:NO];
+    [self.navigationItem setRightBarButtonItem:map];
+    
+
+    [leftItem setTarget:self];
+    [leftItem setAction:@selector(presentFilterView)];
+    
+//    leftItem.target = self;
+//    leftItem.action = @selector(presentFilterView);
 
     
     [self setConstraints];
@@ -230,6 +251,14 @@
     [self presentViewController:nav animated:true completion:nil];
     filterVC.delegate = self;
 
+}
+
+- (void)presentMap {
+    YPMapViewController *mapVC = [[YPMapViewController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:mapVC];
+    mapVC.businesses = self.businesses;
+    [self presentViewController:nav animated:true completion:nil];
+    
 }
 
 #pragma mark - delegate methods
@@ -381,6 +410,7 @@
     
     self.searchBar.delegate = self;
     [self.searchBar sizeToFit];
+    self.searchBar.placeholder = @"Restaurants";
     
     self.navigationItem.titleView = self.searchBar;
     

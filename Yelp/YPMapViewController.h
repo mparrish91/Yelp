@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface YPMapViewController : UIViewController
+@property(strong,readwrite,nonatomic) NSArray *businesses;
 
 @end
