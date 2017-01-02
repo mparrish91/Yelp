@@ -54,7 +54,8 @@
     
     for (Business *biz in self.businesses) {
        CLLocationCoordinate2D cor = biz.location2D;
-        [self addAnnotationAtCoordinate:cor];
+        NSString *title = biz.name;
+        [self addAnnotationAtCoordinate:cor withTitle:title];
         
     }
     
@@ -92,10 +93,10 @@
 }
 
 
-- (void)addAnnotationAtCoordinate:(CLLocationCoordinate2D ) coordinate {
+- (void)addAnnotationAtCoordinate:(CLLocationCoordinate2D ) coordinate withTitle:(NSString *)title {
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
     annotation.coordinate = coordinate;
-    annotation.title = @"An annotation";
+    annotation.title = title;
     [self.mapView addAnnotation:annotation];
 }
 
