@@ -15,6 +15,7 @@
 #import "YPErrorView.h"
 #import "YPFilterViewController.h"
 #import "YPMapViewController.h"
+#import <MapKit/MapKit.h>
 
 
 @interface YPBusinessesViewController ()
@@ -32,6 +33,8 @@
 @property (nonatomic, weak) NSArray * displayedItems;
 
 @property(nonatomic,strong) YPInfiniteScrollActivityView *loadingMoreView;
+@property(nonatomic,strong) MKMapView *mapView;
+@property (nonatomic,assign) BOOL isMapShowing;
 
 
 @end
@@ -48,7 +51,8 @@
     self.errorView = [[YPErrorView alloc]init];
     self.businesses = [[NSMutableArray alloc] init];
     self.filteredBusinesses = [[NSMutableArray alloc] init];
-    
+    self.mapView = [[MKMapView alloc]init];
+
     if (!(self = [super init]))
         return nil;
     
@@ -118,6 +122,10 @@
     [self setupInfiniteScrollView];
     [self addSearchBar];
     [self hideErrorView:self.errorView];
+    
+    [self.mapView setHidden:YES];
+    [self populateMapView];
+    self.isMapShowing = FALSE;
 
     
 }
@@ -254,11 +262,11 @@
 }
 
 - (void)presentMap {
-    YPMapViewController *mapVC = [[YPMapViewController alloc]init];
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:mapVC];
-    mapVC.businesses = self.businesses;
-    [self presentViewController:nav animated:true completion:nil];
-    
+    //YPMapViewController *mapVC = [[YPMapViewController alloc]init];
+    //UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:mapVC];
+    //mapVC.businesses = self.businesses;
+    //[self presentViewController:nav animated:true completion:nil];
+    [self toggleMapView];
 }
 
 #pragma mark - delegate methods
@@ -348,6 +356,7 @@
     self.view = view;
     [view addSubview:self.businessesTableView];
     [view addSubview:self.errorView];
+    [view addSubview:self.mapView];
     
 }
 
@@ -373,6 +382,11 @@
     [self.errorView.topAnchor constraintEqualToAnchor:margins.topAnchor].active = YES;
     [self.errorView.heightAnchor constraintEqualToConstant:30].active = YES;
     
+    self.mapView.translatesAutoresizingMaskIntoConstraints = false;
+    [self.mapView.leadingAnchor constraintEqualToAnchor:view.leadingAnchor].active = YES;
+    [self.mapView.trailingAnchor constraintEqualToAnchor:view.trailingAnchor].active = YES;
+    [self.mapView.topAnchor constraintEqualToAnchor:view.topAnchor].active = YES;
+    [self.mapView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor].active = YES;
 }
 
 - (void)hideErrorView:(YPErrorView *)errorView
@@ -486,5 +500,62 @@
 
 
 }
+
+
+- (void)populateMapView
+{
+    for (Business *biz in self.businesses) {
+        CLLocationCoordinate2D cor = biz.location2D;
+        NSString *title = biz.name;
+        [self addAnnotationAtCoordinate:cor withTitle:title];
+        
+    }
+    
+}
+
+- (void)addAnnotationAtCoordinate:(CLLocationCoordinate2D ) coordinate withTitle:(NSString *)title {
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
+    annotation.coordinate = coordinate;
+    annotation.title = title;
+    [self.mapView addAnnotation:annotation];
+}
+
+- (void)toggleMapView
+{
+    UIView *fromView = [[UIView alloc]init];
+    UIView *toView = [[UIView alloc]init];
+    
+    if (self.isMapShowing)
+    {
+        fromView = self.mapView;
+        toView = self.businessesTableView;
+        
+        self.mapView.hidden = YES;
+        self.businessesTableView.hidden = FALSE;
+
+    }
+    else
+    {
+        toView = self.mapView;
+        fromView = self.businessesTableView;
+        
+        self.mapView.hidden = FALSE;
+        self.businessesTableView.hidden = YES;
+
+    }
+    
+    self.isMapShowing = !self.isMapShowing;
+
+
+    [UIView transitionFromView:fromView toView:toView duration:0.5 options:UIViewAnimationOptionTransitionFlipFromLeft completion:^(BOOL finished) {
+        
+    }];
+    
+    
+
+
+}
+
+
 
 @end
