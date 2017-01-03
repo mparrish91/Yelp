@@ -123,11 +123,9 @@
     [self addSearchBar];
     [self hideErrorView:self.errorView];
     
-    [self.mapView setHidden:YES];
     [self populateMapView];
     self.isMapShowing = FALSE;
 
-    
 }
 
 - (void)doSearch: (NSString *) term {
@@ -354,10 +352,23 @@
     
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.view = view;
+    [view addSubview:self.mapView];
     [view addSubview:self.businessesTableView];
     [view addSubview:self.errorView];
-    [view addSubview:self.mapView];
+
+}
+
+-(void)setMapConstraints
+{
+    UIView *view= self.view;
+    UILayoutGuide *margins = self.view.layoutMarginsGuide;
     
+    self.mapView.translatesAutoresizingMaskIntoConstraints = false;
+    [self.mapView.leadingAnchor constraintEqualToAnchor:view.leadingAnchor].active = YES;
+    [self.mapView.trailingAnchor constraintEqualToAnchor:view.trailingAnchor].active = YES;
+    [self.mapView.topAnchor constraintEqualToAnchor:view.topAnchor].active = YES;
+    [self.mapView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor].active = YES;
+
 }
 
 
@@ -382,11 +393,6 @@
     [self.errorView.topAnchor constraintEqualToAnchor:margins.topAnchor].active = YES;
     [self.errorView.heightAnchor constraintEqualToConstant:30].active = YES;
     
-    self.mapView.translatesAutoresizingMaskIntoConstraints = false;
-    [self.mapView.leadingAnchor constraintEqualToAnchor:view.leadingAnchor].active = YES;
-    [self.mapView.trailingAnchor constraintEqualToAnchor:view.trailingAnchor].active = YES;
-    [self.mapView.topAnchor constraintEqualToAnchor:view.topAnchor].active = YES;
-    [self.mapView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor].active = YES;
 }
 
 - (void)hideErrorView:(YPErrorView *)errorView
@@ -530,18 +536,12 @@
         fromView = self.mapView;
         toView = self.businessesTableView;
         
-        self.mapView.hidden = YES;
-        self.businessesTableView.hidden = FALSE;
-
     }
     else
     {
         toView = self.mapView;
         fromView = self.businessesTableView;
         
-        self.mapView.hidden = FALSE;
-        self.businessesTableView.hidden = YES;
-
     }
     
     self.isMapShowing = !self.isMapShowing;
@@ -555,6 +555,31 @@
 
 
 }
+
+- (void)viewDidLayoutSubviews {
+    if (self.isMapShowing)
+    {
+        [self setMapConstraints];
+        [self populateMapView];
+        
+        CLLocation *centerLocation = [[CLLocation alloc]initWithLatitude:37.7833 longitude:-122.4167];
+        [self goToLocation:centerLocation];
+
+    }
+    else{
+        [self setConstraints];
+    }
+    
+}
+
+- (void)goToLocation:(CLLocation *) location {
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);
+    MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, span);
+    [self.mapView setRegion:region animated:false];
+    
+    
+}
+
 
 
 
