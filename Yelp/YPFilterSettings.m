@@ -11,10 +11,24 @@
 
 @interface YPFilterSettings ()
 
-
 @end
 
 
 @implementation YPFilterSettings
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        
+        self.category = [[NSMutableDictionary alloc]init];
+        self.distance = [[NSMutableDictionary alloc] init];
+        self.deals = [[NSMutableDictionary alloc]init];
+        self.sort = [[NSMutableDictionary alloc] init];
+
+        
+    }
+    return self;
+}
+
 
 @end

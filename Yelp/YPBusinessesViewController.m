@@ -260,7 +260,7 @@
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:filterVC];
     if (self.switchStates)
     {
-        filterVC.switchStates = self.switchStates;
+        filterVC.filterSettings = self.filterSettings;
     }
     nav.navigationBar.titleTextAttributes
     = @{UITextAttributeTextColor : [UIColor whiteColor]};
@@ -284,7 +284,7 @@
 {
     NSArray *categories = filters[@"categories"];
     
-    self.switchStates = filtersViewController.switchStates;
+    self.filterSettings = filtersViewController.filterSettings;
     
     [Business searchWithCategoriesWithTerm:@"Restaurants" offset:nil categories:categories completion:^(NSArray *objects, NSError *error)
      {

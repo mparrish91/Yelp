@@ -8,7 +8,6 @@
 
 #import "YPFilterViewController.h"
 #import "YPFilterTableViewCell.h"
-#import "YPFilterSettings.h"
 
 
 @interface YPFilterViewController ()
@@ -21,7 +20,6 @@
 @property (nonatomic, strong) NSArray * distance;
 @property (nonatomic, strong) NSArray * sort;
 @property (nonatomic, strong) NSIndexPath * selectedRowIndex;
-@property (nonatomic, strong) YPFilterSettings * filterSettings;
 
 
 @end
@@ -35,7 +33,7 @@
 {
     self.filtersTableView = [[UITableView alloc]init];
     self.switchStates = [[NSMutableDictionary alloc]init];
-    self.filters = @[ @"Offering a Deal", @"Sort By",@"Distance", @"Category"];
+    self.filters = @[ @"Offering a Deal",@"Distance", @"Sort By", @"Category"];
     self.distance = @[ @"Auto", @"0.3 miles",@"1 mile", @"5 miles", @"20 miles"];
     self.sort = @[ @"Best Match", @"Highest Rated",@"Distance"];
     self.filterSettings = [[YPFilterSettings alloc]init];
@@ -325,7 +323,6 @@
     if (indexPath.section == 1)
     {
         cell.filterLabel.text = self.distance[indexPath.row];
-        cell.filterLabel.text = self.filters[0];
         
         if (self.filterSettings.deals[convertedIndexPath] != nil)
         {
@@ -338,7 +335,6 @@
     if (indexPath.section == 2)
     {
         cell.filterLabel.text = self.sort[indexPath.row];
-        cell.filterLabel.text = self.filters[0];
         
         if (self.filterSettings.deals[convertedIndexPath] != nil)
         {
@@ -353,7 +349,6 @@
     {
         NSDictionary *categoryName = [self.categories objectAtIndex:indexPath.row];
         cell.filterLabel.text = categoryName[@"name"];
-        cell.filterLabel.text = self.filters[0];
         
         if (self.filterSettings.deals[convertedIndexPath] != nil)
         {

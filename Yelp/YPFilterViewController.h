@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "YPFilterTableViewCell.h"
+#import "YPFilterSettings.h"
+
 @protocol YPFiltersViewControllerDelegate;
 
 
@@ -16,6 +18,7 @@
 @property(weak,nonatomic) id <YPFiltersViewControllerDelegate> delegate;
 
 @property (nonatomic, strong) NSMutableDictionary * switchStates;
+@property (nonatomic, strong) YPFilterSettings * filterSettings;
 
 @end
 
