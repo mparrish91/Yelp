@@ -313,7 +313,7 @@
         
         if (self.filterSettings.deals[convertedIndexPath] != nil)
         {
-            cell.filterSwitch.on = self.switchStates[convertedIndexPath];
+            cell.filterSwitch.on = self.filterSettings.deals[convertedIndexPath];
         }
         else{
             cell.filterSwitch.on = false;
@@ -324,9 +324,9 @@
     {
         cell.filterLabel.text = self.distance[indexPath.row];
         
-        if (self.filterSettings.deals[convertedIndexPath] != nil)
+        if (self.filterSettings.distance[convertedIndexPath] != nil)
         {
-            cell.filterSwitch.on = self.switchStates[convertedIndexPath];
+            cell.filterSwitch.on = self.filterSettings.distance[convertedIndexPath];
         }
         else{
             cell.filterSwitch.on = false;
@@ -336,9 +336,9 @@
     {
         cell.filterLabel.text = self.sort[indexPath.row];
         
-        if (self.filterSettings.deals[convertedIndexPath] != nil)
+        if (self.filterSettings.sort[convertedIndexPath] != nil)
         {
-            cell.filterSwitch.on = self.switchStates[convertedIndexPath];
+            cell.filterSwitch.on = self.filterSettings.sort[convertedIndexPath];
         }
         else{
             cell.filterSwitch.on = false;
@@ -350,9 +350,9 @@
         NSDictionary *categoryName = [self.categories objectAtIndex:indexPath.row];
         cell.filterLabel.text = categoryName[@"name"];
         
-        if (self.filterSettings.deals[convertedIndexPath] != nil)
+        if (self.filterSettings.category[convertedIndexPath] != nil)
         {
-            cell.filterSwitch.on = self.switchStates[convertedIndexPath];
+            cell.filterSwitch.on = self.filterSettings.category[convertedIndexPath];
         }
         else{
             cell.filterSwitch.on = false;
@@ -407,8 +407,8 @@
 
     }
 
-    //NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
-    //self.switchStates[convertedIndexPath] = [NSNumber numberWithBool:value];
+    NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+    self.switchStates[convertedIndexPath] = [NSNumber numberWithBool:value];
 
 }
 

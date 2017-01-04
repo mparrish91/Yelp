@@ -258,10 +258,8 @@
 - (void)presentFilterView {
         YPFilterViewController *filterVC = [[YPFilterViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:filterVC];
-    if (self.switchStates)
-    {
-        filterVC.filterSettings = self.filterSettings;
-    }
+    filterVC.filterSettings = self.filterSettings;
+
     nav.navigationBar.titleTextAttributes
     = @{UITextAttributeTextColor : [UIColor whiteColor]};
     
