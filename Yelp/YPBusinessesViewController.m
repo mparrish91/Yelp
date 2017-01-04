@@ -275,28 +275,24 @@
     
     int count = self.businesses.count;
     
-    [Business searchWithCategoriesWithTerm:@"Restaurants" offset:count categories:categories completion:^(NSArray *objects, NSError *error)
-
+    [Business searchWithCategoriesWithTerm:@"Restaurants" offset:nil categories:categories completion:^(NSArray *objects, NSError *error)
      {
          if (error)
          {
              [self showErrorView:self.errorView];
          }
-
-         self.businesses = objects;
+         [self.businesses removeAllObjects];
+         [self.businesses addObjectsFromArray:objects];
          self.displayedItems = self.businesses;
 
-         
          dispatch_async(dispatch_get_main_queue(), ^{
              self.isMoreDataLoading = false;
-             [self.businessesTableView reloadData];
-             
              
              if ([[NSThread currentThread] isMainThread]){
-                 NSLog(@"In main thread--completion handler");
                  [self.refreshControl endRefreshing];
                  [self.loadingMoreView stopAnimating];
-                 
+                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 [self.businessesTableView reloadData];
                  
              }
              else{

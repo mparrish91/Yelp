@@ -11,11 +11,9 @@
 
 
 @interface YPFilterViewController ()
+
 @property(strong,readwrite,nonatomic) NSArray *categories;
-
-
 @property(nonatomic,strong) UITableView *filtersTableView;
-
 @property (nonatomic, strong) NSMutableArray * filteredBusinesses;
 @property (nonatomic, strong) NSArray * displayedItems;
 @property (nonatomic, strong) NSMutableDictionary * switchStates;
@@ -23,8 +21,6 @@
 @property (nonatomic, strong) NSArray * distance;
 @property (nonatomic, strong) NSArray * sort;
 @property (nonatomic, strong) NSIndexPath * selectedRowIndex;
-
-
 
 @end
 
@@ -216,7 +212,6 @@
     if (!(self = [super init]))
         return nil;
     
-    
     return self;
 }
 
@@ -231,9 +226,7 @@
     
     self.title = @"Filter";
     
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"  style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButtonTapped)];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search"  style:UIBarButtonItemStylePlain target:self action:@selector(onSearchButtonTapped)];
     
     self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.7];
@@ -262,13 +255,11 @@
     if (section == 0)
     {
         return 1;
-
     }
-
+    
     if (section == 1)
     {
         return self.distance.count;
-
     }
     if (section == 2)
     {
@@ -285,16 +276,11 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-   
-    headerView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.9];
     UILabel *categoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 120, 30)];
     categoryLabel.font = [UIFont fontWithName:@"Avenir-Book-Bold" size:15];
     categoryLabel.textColor = [UIColor blackColor];
-    
     categoryLabel.text = [self.filters objectAtIndex:section];
-    
     [headerView addSubview:categoryLabel];
-    
     
     return headerView;
 }
@@ -302,8 +288,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 40;
 }
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
         return 60;
@@ -319,7 +303,6 @@
     {
         cell = [[YPFilterTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
     
     return cell;
 }
@@ -348,20 +331,16 @@
         cell.filterLabel.text = categoryName[@"name"];
     }
     
-    
     cell.delegate = self;
     NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     if (self.switchStates[convertedIndexPath] != nil)
     {
         cell.filterSwitch.on = self.switchStates[convertedIndexPath];
-
     }
     else{
         cell.filterSwitch.on = false;
-
     }
     
-
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -378,7 +357,6 @@
 {
     NSIndexPath *indexPath = [self.filtersTableView indexPathForCell:cell];
     
-    NSLog(@"filters got the switch event");
     NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     self.switchStates[convertedIndexPath] = [NSNumber numberWithBool:value];
     NSLog(@"filters got the switch event");
