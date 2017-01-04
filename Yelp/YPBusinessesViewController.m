@@ -16,6 +16,8 @@
 #import "YPFilterViewController.h"
 #import "YPMapViewController.h"
 #import <MapKit/MapKit.h>
+#import "YPFilterSettings.h"
+
 
 
 @interface YPBusinessesViewController ()
@@ -31,6 +33,7 @@
 
 @property (nonatomic, strong) NSMutableArray * filteredBusinesses;
 @property (nonatomic, strong) NSMutableDictionary *switchStates;
+@property (nonatomic, strong) YPFilterSettings * filterSettings;
 
 @property (nonatomic, weak) NSArray * displayedItems;
 
@@ -54,6 +57,8 @@
     self.businesses = [[NSMutableArray alloc] init];
     self.filteredBusinesses = [[NSMutableArray alloc] init];
     self.mapView = [[MKMapView alloc]init];
+    self.filterSettings = [[YPFilterSettings alloc]init];
+
 
     if (!(self = [super init]))
         return nil;

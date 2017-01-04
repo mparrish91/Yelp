@@ -8,6 +8,7 @@
 
 #import "YPFilterViewController.h"
 #import "YPFilterTableViewCell.h"
+#import "YPFilterSettings.h"
 
 
 @interface YPFilterViewController ()
@@ -20,6 +21,8 @@
 @property (nonatomic, strong) NSArray * distance;
 @property (nonatomic, strong) NSArray * sort;
 @property (nonatomic, strong) NSIndexPath * selectedRowIndex;
+@property (nonatomic, strong) YPFilterSettings * filterSettings;
+
 
 @end
 
@@ -35,6 +38,8 @@
     self.filters = @[ @"Offering a Deal", @"Sort By",@"Distance", @"Category"];
     self.distance = @[ @"Auto", @"0.3 miles",@"1 mile", @"5 miles", @"20 miles"];
     self.sort = @[ @"Best Match", @"Highest Rated",@"Distance"];
+    self.filterSettings = [[YPFilterSettings alloc]init];
+
 
     self.categories = @[@
     {@"name" : @"Afghan", @"code": @"afghani"},
@@ -302,42 +307,67 @@
     {
         cell = [[YPFilterTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     
     if (indexPath.section == 0)
     {
         cell.filterLabel.text = self.filters[0];
         
+        if (self.filterSettings.deals[convertedIndexPath] != nil)
+        {
+            cell.filterSwitch.on = self.switchStates[convertedIndexPath];
+        }
+        else{
+            cell.filterSwitch.on = false;
+        }
     }
     
     if (indexPath.section == 1)
     {
         cell.filterLabel.text = self.distance[indexPath.row];
+        cell.filterLabel.text = self.filters[0];
+        
+        if (self.filterSettings.deals[convertedIndexPath] != nil)
+        {
+            cell.filterSwitch.on = self.switchStates[convertedIndexPath];
+        }
+        else{
+            cell.filterSwitch.on = false;
+        }
     }
     if (indexPath.section == 2)
     {
         cell.filterLabel.text = self.sort[indexPath.row];
+        cell.filterLabel.text = self.filters[0];
+        
+        if (self.filterSettings.deals[convertedIndexPath] != nil)
+        {
+            cell.filterSwitch.on = self.switchStates[convertedIndexPath];
+        }
+        else{
+            cell.filterSwitch.on = false;
+        }
     }
     
     if (indexPath.section == 3)
     {
         NSDictionary *categoryName = [self.categories objectAtIndex:indexPath.row];
         cell.filterLabel.text = categoryName[@"name"];
+        cell.filterLabel.text = self.filters[0];
+        
+        if (self.filterSettings.deals[convertedIndexPath] != nil)
+        {
+            cell.filterSwitch.on = self.switchStates[convertedIndexPath];
+        }
+        else{
+            cell.filterSwitch.on = false;
+        }
     }
     
     cell.delegate = self;
-    NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
-    
-    //mark add support for sleection of different tableview sections
-    if (self.switchStates[convertedIndexPath] != nil)
-    {
-        cell.filterSwitch.on = self.switchStates[convertedIndexPath];
-    }
-    else{
-        cell.filterSwitch.on = false;
-    }
-
     
 
+    
     return cell;
 }
 
@@ -354,9 +384,36 @@
 - (void)ypFilterCellSwitchDidChange:(YPFilterTableViewCell *)cell value: (BOOL)value;
 {
     NSIndexPath *indexPath = [self.filtersTableView indexPathForCell:cell];
-    NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
-    self.switchStates[convertedIndexPath] = [NSNumber numberWithBool:value];
     NSLog(@"filters got the switch event");
+
+    
+    //Creation of Filter Settings. Needs Refactor
+    if (indexPath.section == 0)
+    {
+        NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        self.filterSettings.deals[convertedIndexPath] = [NSNumber numberWithBool:value];
+    }
+    if (indexPath.section == 1)
+    {
+        NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        self.filterSettings.sort[convertedIndexPath] = [NSNumber numberWithBool:value];
+
+    }
+    if (indexPath.section == 2)
+    {
+        NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        self.filterSettings.distance[convertedIndexPath] = [NSNumber numberWithBool:value];
+    }
+
+    if (indexPath.section == 3)
+    {
+        NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        self.filterSettings.category[convertedIndexPath] = [NSNumber numberWithBool:value];
+
+    }
+
+    //NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+    //self.switchStates[convertedIndexPath] = [NSNumber numberWithBool:value];
 
 }
 

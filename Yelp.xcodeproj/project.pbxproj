@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		39953E8188D741A2FCAE22E7 /* Pods_Yelp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A732B69D655E04327FF6F44A /* Pods_Yelp.framework */; };
 		420E29181E18A2CB00B7219B /* YPMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 420E29171E18A2CB00B7219B /* YPMapViewController.m */; };
+		420E291B1E1D97B500B7219B /* YPFilterSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 420E291A1E1D97B500B7219B /* YPFilterSettings.m */; };
 		4237EBC81DBD489B0074393E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4237EBC71DBD489B0074393E /* main.m */; };
 		4237EBCB1DBD489B0074393E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4237EBCA1DBD489B0074393E /* AppDelegate.m */; };
 		4237EBCE1DBD489B0074393E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4237EBCD1DBD489B0074393E /* ViewController.m */; };
@@ -28,6 +29,8 @@
 /* Begin PBXFileReference section */
 		420E29161E18A2CB00B7219B /* YPMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YPMapViewController.h; sourceTree = "<group>"; };
 		420E29171E18A2CB00B7219B /* YPMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YPMapViewController.m; sourceTree = "<group>"; };
+		420E29191E1D97B500B7219B /* YPFilterSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YPFilterSettings.h; sourceTree = "<group>"; };
+		420E291A1E1D97B500B7219B /* YPFilterSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YPFilterSettings.m; sourceTree = "<group>"; };
 		4237EBC31DBD489B0074393E /* Yelp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yelp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4237EBC71DBD489B0074393E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4237EBC91DBD489B0074393E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 				42F8697B1DBD59C7005A2568 /* Models */,
 				42F869771DBD49FA005A2568 /* YelpClient.swift */,
 				42F869791DBD49FF005A2568 /* Business.swift */,
+				420E29191E1D97B500B7219B /* YPFilterSettings.h */,
+				420E291A1E1D97B500B7219B /* YPFilterSettings.m */,
 				4237EBC91DBD489B0074393E /* AppDelegate.h */,
 				4237EBCA1DBD489B0074393E /* AppDelegate.m */,
 				4237EBCC1DBD489B0074393E /* ViewController.h */,
@@ -297,6 +302,7 @@
 				42F869861DBD5A3F005A2568 /* YPErrorView.m in Sources */,
 				42F869781DBD49FA005A2568 /* YelpClient.swift in Sources */,
 				42F869831DBD5A2D005A2568 /* YPFilterViewController.m in Sources */,
+				420E291B1E1D97B500B7219B /* YPFilterSettings.m in Sources */,
 				425EFA7A1DBD7EBB004FC5D3 /* YPFilterTableViewCell.m in Sources */,
 				42F869801DBD5A22005A2568 /* YPBusinessesViewController.m in Sources */,
 				42F8698C1DBD5A72005A2568 /* YPBusinessTableViewCell.m in Sources */,
