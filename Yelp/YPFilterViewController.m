@@ -16,7 +16,6 @@
 @property(nonatomic,strong) UITableView *filtersTableView;
 @property (nonatomic, strong) NSMutableArray * filteredBusinesses;
 @property (nonatomic, strong) NSArray * displayedItems;
-@property (nonatomic, strong) NSMutableDictionary * switchStates;
 @property (nonatomic, strong) NSArray * filters;
 @property (nonatomic, strong) NSArray * distance;
 @property (nonatomic, strong) NSArray * sort;
@@ -304,12 +303,6 @@
         cell = [[YPFilterTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    return cell;
-}
-
-//This function is where all the magic happens
--(void) tableView:(UITableView *) tableView willDisplayCell:(YPFilterTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
     if (indexPath.section == 0)
     {
         cell.filterLabel.text = self.filters[0];
@@ -333,6 +326,8 @@
     
     cell.delegate = self;
     NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+    
+    //mark add support for sleection of different tableview sections
     if (self.switchStates[convertedIndexPath] != nil)
     {
         cell.filterSwitch.on = self.switchStates[convertedIndexPath];
@@ -340,7 +335,10 @@
     else{
         cell.filterSwitch.on = false;
     }
+
     
+
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -356,7 +354,6 @@
 - (void)ypFilterCellSwitchDidChange:(YPFilterTableViewCell *)cell value: (BOOL)value;
 {
     NSIndexPath *indexPath = [self.filtersTableView indexPathForCell:cell];
-    
     NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     self.switchStates[convertedIndexPath] = [NSNumber numberWithBool:value];
     NSLog(@"filters got the switch event");
@@ -400,8 +397,6 @@
 
 -(void)onSearchButtonTapped
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
     NSMutableDictionary *filters = [[NSMutableDictionary alloc]init];
     NSMutableArray *selectedCategories = [[NSMutableArray alloc]init];
     
@@ -423,6 +418,9 @@
     if ([self.delegate respondsToSelector:@selector(ypFiltersViewControllerDidUpdateFilters:filters:)]) {
         [self.delegate ypFiltersViewControllerDidUpdateFilters:self filters:filters];
     }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+
     
 }
 

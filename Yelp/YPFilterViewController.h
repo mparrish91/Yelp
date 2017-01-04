@@ -15,6 +15,8 @@
 
 @property(weak,nonatomic) id <YPFiltersViewControllerDelegate> delegate;
 
+@property (nonatomic, strong) NSMutableDictionary * switchStates;
+
 @end
 
 

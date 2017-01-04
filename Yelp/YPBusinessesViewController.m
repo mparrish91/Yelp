@@ -30,6 +30,8 @@
 @property(nonatomic,strong) YPErrorView *errorView;
 
 @property (nonatomic, strong) NSMutableArray * filteredBusinesses;
+@property (nonatomic, strong) NSMutableDictionary *switchStates;
+
 @property (nonatomic, weak) NSArray * displayedItems;
 
 @property(nonatomic,strong) YPInfiniteScrollActivityView *loadingMoreView;
@@ -251,6 +253,10 @@
 - (void)presentFilterView {
         YPFilterViewController *filterVC = [[YPFilterViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:filterVC];
+    if (self.switchStates)
+    {
+        filterVC.switchStates = self.switchStates;
+    }
     nav.navigationBar.titleTextAttributes
     = @{UITextAttributeTextColor : [UIColor whiteColor]};
     
@@ -273,7 +279,7 @@
 {
     NSArray *categories = filters[@"categories"];
     
-    int count = self.businesses.count;
+    self.switchStates = filtersViewController.switchStates;
     
     [Business searchWithCategoriesWithTerm:@"Restaurants" offset:nil categories:categories completion:^(NSArray *objects, NSError *error)
      {
