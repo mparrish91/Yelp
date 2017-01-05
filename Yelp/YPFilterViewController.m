@@ -20,6 +20,10 @@
 @property (nonatomic, strong) NSArray * distance;
 @property (nonatomic, strong) NSArray * sort;
 @property (nonatomic, strong) NSIndexPath * selectedRowIndex;
+@property (nonatomic,assign) BOOL isShowingDistance;
+@property (nonatomic,assign) BOOL isShowingSortBy;
+@property (nonatomic,assign) BOOL isShowingCategories;
+@property (nonatomic,assign) int rowHiddenAfterIndex;
 
 
 @end
@@ -261,16 +265,42 @@
     
     if (section == 1)
     {
-        return self.distance.count;
+        if (self.isShowingDistance)
+        {
+            return self.distance.count;
+        }
+        else
+        {
+            return 1;
+        }
+            
     }
     if (section == 2)
     {
-        return self.sort.count;
+        if (self.isShowingSortBy)
+        {
+            return self.sort.count;
+
+        }
+        else
+        {
+            return 1;
+        }
+        
     }
     
     if (section == 3)
     {
-        return self.categories.count;
+        if (self.isShowingCategories)
+        {
+            return self.categories.count;
+
+        }
+        else
+        {
+            return 1;
+        }
+        
     }
     
     return 1;
@@ -371,6 +401,22 @@
     
     [tableView beginUpdates];
     [tableView endUpdates];
+    
+    if (indexPath.section == 1)
+    {
+        self.isShowingDistance = !self.isShowingDistance;
+    }
+    
+    if (indexPath.section == 2)
+    {
+        self.isShowingSortBy = !self.isShowingSortBy;
+    }
+    
+    if (indexPath.section == 3)
+    {
+        self.isShowingCategories = !self.isShowingCategories;
+    }
+
 }
 
 
