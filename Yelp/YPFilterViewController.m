@@ -289,7 +289,7 @@
         }
         else
         {
-            return 3;
+            return 4;
         }
         
     }
@@ -382,6 +382,12 @@
     {
         NSDictionary *categoryName = [self.categories objectAtIndex:indexPath.row];
         cell.filterLabel.text = categoryName[@"name"];
+        
+        if (indexPath.row == 3)
+        {
+            cell.filterLabel.text = @"See more categories";
+
+        }
         
         if (self.filterSettings.category[convertedIndexPath] != nil)
         {
