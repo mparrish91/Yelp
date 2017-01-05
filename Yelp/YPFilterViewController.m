@@ -23,7 +23,6 @@
 @property (nonatomic,assign) BOOL isShowingDistance;
 @property (nonatomic,assign) BOOL isShowingSortBy;
 @property (nonatomic,assign) BOOL isShowingCategories;
-@property (nonatomic,assign) int rowHiddenAfterIndex;
 
 @end
 
@@ -254,11 +253,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    //if cell should be expanded. return expanded number of rows. simple
     if (section == 0)
     {
         return 1;
     }
-    
     if (section == 1)
     {
         if (self.isShowingDistance)
@@ -269,20 +268,17 @@
         {
             return 1;
         }
-            
     }
     if (section == 2)
     {
         if (self.isShowingSortBy)
         {
             return self.sort.count;
-
         }
         else
         {
             return 1;
         }
-        
     }
     
     if (section == 3)
@@ -290,7 +286,6 @@
         if (self.isShowingCategories)
         {
             return self.categories.count;
-
         }
         else
         {
@@ -298,8 +293,6 @@
         }
         
     }
-    
-    
     return 1;
 }
 
@@ -340,15 +333,16 @@
         cell.filterLabel.text = self.filters[0];
         
         //rememebring if the switch was on
-        if (self.filterSettings.deals[convertedIndexPath] != nil)
+        if (self.filterSettings.deals[@"0"] != nil)
         {
-            cell.filterSwitch.on = self.filterSettings.deals[convertedIndexPath];
+            int po = [self.filterSettings.deals[@"0"] intValue];
+            NSNumber *num = [NSNumber numberWithInteger:po];
+            BOOL myBool = [num boolValue];
+            cell.filterSwitch.on =  myBool;
         }
         else{
             cell.filterSwitch.on = false;
         }
-
-
     }
     
     if (indexPath.section == 1)
@@ -371,6 +365,8 @@
     }
     if (indexPath.section == 2)
     {
+        convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row - 1];
+
         cell.filterLabel.text = self.sort[indexPath.row];
         
         if (self.filterSettings.sort[convertedIndexPath] != nil)
