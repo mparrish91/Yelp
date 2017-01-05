@@ -25,7 +25,6 @@
 @property (nonatomic,assign) BOOL isShowingCategories;
 @property (nonatomic,assign) int rowHiddenAfterIndex;
 
-
 @end
 
 @implementation YPFilterViewController
@@ -41,7 +40,6 @@
     self.distance = @[ @"Auto", @"0.3 miles",@"1 mile", @"5 miles", @"20 miles"];
     self.sort = @[ @"Best Match", @"Highest Rated",@"Distance"];
     self.filterSettings = [[YPFilterSettings alloc]init];
-
 
     self.categories = @[@
     {@"name" : @"Afghan", @"code": @"afghani"},
@@ -213,8 +211,7 @@
         @{@"name" : @"Wok", @"code": @"wok"},
         @{@"name" : @"Wraps", @"code": @"wraps"},
         @{@"name" : @"Yugoslav", @"code": @"yugoslav"}];
-    
-    
+
     if (!(self = [super init]))
         return nil;
     
@@ -244,7 +241,6 @@
     self.filtersTableView.dataSource = self;
     
     [self setConstraints];
-    
 }
 
 
@@ -298,10 +294,11 @@
         }
         else
         {
-            return 1;
+            return 3;
         }
         
     }
+    
     
     return 1;
 }
@@ -337,10 +334,12 @@
     }
     NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     
+    //setting the different sections
     if (indexPath.section == 0)
     {
         cell.filterLabel.text = self.filters[0];
         
+        //rememebring if the switch was on
         if (self.filterSettings.deals[convertedIndexPath] != nil)
         {
             cell.filterSwitch.on = self.filterSettings.deals[convertedIndexPath];
@@ -348,6 +347,8 @@
         else{
             cell.filterSwitch.on = false;
         }
+
+
     }
     
     if (indexPath.section == 1)
@@ -361,6 +362,12 @@
         else{
             cell.filterSwitch.on = false;
         }
+        
+        if (!self.isShowingDistance)
+        {
+            cell.filterLabel.text = self.distance[self.selectedRowIndex.row];
+        }
+
     }
     if (indexPath.section == 2)
     {
@@ -397,8 +404,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectedRowIndex = indexPath;
-        
+    
     if (indexPath.section == 1)
     {
         self.isShowingDistance = !self.isShowingDistance;
@@ -413,8 +419,10 @@
     {
         self.isShowingCategories = !self.isShowingCategories;
     }
+    int section = indexPath.section;
+    NSIndexSet *set = [NSIndexSet indexSetWithIndex:section];
     
-    [self.filtersTableView reloadData];
+    [self.filtersTableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
 
 }
 
@@ -424,6 +432,7 @@
 - (void)ypFilterCellSwitchDidChange:(YPFilterTableViewCell *)cell value: (BOOL)value;
 {
     NSIndexPath *indexPath = [self.filtersTableView indexPathForCell:cell];
+    self.selectedRowIndex = indexPath;             //storing selected indexPath
     NSLog(@"filters got the switch event");
 
     
@@ -432,28 +441,43 @@
     {
         NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
         self.filterSettings.deals[convertedIndexPath] = [NSNumber numberWithBool:value];
+        
     }
     if (indexPath.section == 1)
     {
         NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
         self.filterSettings.sort[convertedIndexPath] = [NSNumber numberWithBool:value];
+        self.isShowingDistance = !self.isShowingDistance;
+
 
     }
     if (indexPath.section == 2)
     {
         NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
         self.filterSettings.distance[convertedIndexPath] = [NSNumber numberWithBool:value];
+        self.isShowingSortBy = !self.isShowingSortBy;
+
     }
 
     if (indexPath.section == 3)
     {
         NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
         self.filterSettings.category[convertedIndexPath] = [NSNumber numberWithBool:value];
+        self.isShowingCategories = !self.isShowingCategories;
+
 
     }
 
     NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     self.switchStates[convertedIndexPath] = [NSNumber numberWithBool:value];
+    
+    
+    //reload tableview for close after selection
+    //first step was toggling of show
+    int section = indexPath.section;
+    NSIndexSet *set = [NSIndexSet indexSetWithIndex:section];
+    [self.filtersTableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
+
 
 }
 

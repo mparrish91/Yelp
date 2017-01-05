@@ -51,7 +51,7 @@ enum YelpSortMode: Int {
         return searchWithTerm(term, sort: nil, offset: offset, categories: nil, deals: nil, completion: completion)
     }
     
-    func searchWithTerm(_ term: String, sort: YelpSortMode?, offset: Int, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+    func searchWithTerm(_ term: String, sort: YelpSortMode?, offset: Int, radius: Int, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
         
         // Default the location to San Francisco
@@ -68,6 +68,14 @@ enum YelpSortMode: Int {
         if deals != nil {
             parameters["deals_filter"] = deals! as AnyObject?
         }
+        
+        // Added radius (distance) filter
+        let max_radius = 40000
+        var newRadius = min(max_radius, radius)
+        if newRadius <= 0 {
+            newRadius = max_radius
+        }
+        parameters["radius_filter"] = newRadius as AnyObject
         
         print(parameters)
         
