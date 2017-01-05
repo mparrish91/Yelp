@@ -398,10 +398,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedRowIndex = indexPath;
-    
-    [tableView beginUpdates];
-    [tableView endUpdates];
-    
+        
     if (indexPath.section == 1)
     {
         self.isShowingDistance = !self.isShowingDistance;
@@ -416,6 +413,8 @@
     {
         self.isShowingCategories = !self.isShowingCategories;
     }
+    
+    [self.filtersTableView reloadData];
 
 }
 
