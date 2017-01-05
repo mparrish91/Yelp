@@ -332,7 +332,7 @@
     {
         cell = [[YPFilterTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+    NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row + 4];
     
     //setting the different sections
     if (indexPath.section == 0)
@@ -355,17 +355,17 @@
     {
         cell.filterLabel.text = self.distance[indexPath.row];
         
+        if (!self.isShowingDistance)
+        {
+            cell.filterLabel.text = self.distance[self.selectedRowIndex.row];
+        }
+        
         if (self.filterSettings.distance[convertedIndexPath] != nil)
         {
             cell.filterSwitch.on = self.filterSettings.distance[convertedIndexPath];
         }
         else{
             cell.filterSwitch.on = false;
-        }
-        
-        if (!self.isShowingDistance)
-        {
-            cell.filterLabel.text = self.distance[self.selectedRowIndex.row];
         }
 
     }
@@ -446,7 +446,7 @@
     if (indexPath.section == 1)
     {
         NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
-        self.filterSettings.sort[convertedIndexPath] = [NSNumber numberWithBool:value];
+        self.filterSettings.distance[convertedIndexPath] = [NSNumber numberWithBool:value];
         self.isShowingDistance = !self.isShowingDistance;
 
 
@@ -454,7 +454,7 @@
     if (indexPath.section == 2)
     {
         NSString *convertedIndexPath = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
-        self.filterSettings.distance[convertedIndexPath] = [NSNumber numberWithBool:value];
+        self.filterSettings.sort[convertedIndexPath] = [NSNumber numberWithBool:value];
         self.isShowingSortBy = !self.isShowingSortBy;
 
     }
