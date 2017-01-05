@@ -19,11 +19,11 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Distance filter should expand as in the real Yelp app.
+- [x] Distance filter should expand as in the real Yelp app.
 - [ ]  Categories should show a subset of the full list with a "See All" row to expand.
 - [ ] Implement the restaurant detail page.
-- [ ] Infinite scroll for restaurant results
-- [ ] Implement map view of restaurant results
+- [x] Infinite scroll for restaurant results
+- [x] Implement map view of restaurant results
 - [ ] Optional: implement a custom switch
 
 implement a custom switch
