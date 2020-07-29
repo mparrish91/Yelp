@@ -1,6 +1,6 @@
 # Project 2 - *Yelp Client*
 
-**Yelp Client** is a movies app using the [The Yelp API](https://www.yelp.com/developer…).  Built in Objective C.  No Storyboards. Using NSLayoutAnchor.
+**Yelp Client** is a Yelp app built using the [The Yelp API](https://www.yelp.com/developer…).  Built in Objective C.  No Storyboards. Using NSLayoutAnchor.
 
 Time spent: **18** hours spent in total
 
